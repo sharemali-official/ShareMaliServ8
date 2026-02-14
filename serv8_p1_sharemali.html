@@ -493,32 +493,96 @@
           <textarea id="slide2Message"></textarea>
         </div>
         <div class="field-group">
-          <label>slide 3 question</label>
+          <label>slide 3 title</label>
+          <input type="text" id="slide3Title" value="question one">
+        </div>
+        <div class="field-group">
+          <label>slide 3 question (yes/no)</label>
           <textarea id="slide3Question"></textarea>
         </div>
         <div class="field-group">
-          <label>slide 4 question</label>
+          <label>slide 4 title</label>
+          <input type="text" id="slide4Title" value="question two">
+        </div>
+        <div class="field-group">
+          <label>slide 4 question (yes/no)</label>
           <textarea id="slide4Question"></textarea>
         </div>
         <div class="field-group">
-          <label>slide 5 question</label>
+          <label>slide 5 title</label>
+          <input type="text" id="slide5Title" value="question three">
+        </div>
+        <div class="field-group">
+          <label>slide 5 question (yes/yes - two positive options)</label>
           <textarea id="slide5Question"></textarea>
         </div>
         <div class="field-group">
-          <label>slide 6 question</label>
+          <label>slide 5 option 1 (e.g. "a little")</label>
+          <input type="text" id="slide5Option1" value="a little">
+        </div>
+        <div class="field-group">
+          <label>slide 5 option 2 (e.g. "a lot")</label>
+          <input type="text" id="slide5Option2" value="a lot">
+        </div>
+        <div class="field-group">
+          <label>slide 6 title</label>
+          <input type="text" id="slide6Title" value="beverage time">
+        </div>
+        <div class="field-group">
+          <label>slide 6 question (coffee/tea/other)</label>
           <textarea id="slide6Question"></textarea>
         </div>
         <div class="field-group">
-          <label>slide 7 question</label>
+          <label>slide 6 option 1</label>
+          <input type="text" id="slide6Option1" value="coffee">
+        </div>
+        <div class="field-group">
+          <label>slide 6 option 2</label>
+          <input type="text" id="slide6Option2" value="tea">
+        </div>
+        <div class="field-group">
+          <label>slide 6 option 3</label>
+          <input type="text" id="slide6Option3" value="other">
+        </div>
+        <div class="field-group">
+          <label>slide 7 title</label>
+          <input type="text" id="slide7Title" value="anime taste">
+        </div>
+        <div class="field-group">
+          <label>slide 7 question (jjk/attack/other)</label>
           <textarea id="slide7Question"></textarea>
         </div>
         <div class="field-group">
-          <label>slide 8 question</label>
+          <label>slide 7 option 1</label>
+          <input type="text" id="slide7Option1" value="jujutsu kaisen">
+        </div>
+        <div class="field-group">
+          <label>slide 7 option 2</label>
+          <input type="text" id="slide7Option2" value="attack on titan">
+        </div>
+        <div class="field-group">
+          <label>slide 7 option 3</label>
+          <input type="text" id="slide7Option3" value="other">
+        </div>
+        <div class="field-group">
+          <label>slide 8 title</label>
+          <input type="text" id="slide8Title" value="final question">
+        </div>
+        <div class="field-group">
+          <label>slide 8 question (you/you)</label>
           <textarea id="slide8Question"></textarea>
         </div>
         <div class="field-group">
+          <label>slide 8 option 1</label>
+          <input type="text" id="slide8Option1" value="you">
+        </div>
+        <div class="field-group">
+          <label>slide 8 option 2</label>
+          <input type="text" id="slide8Option2" value="you">
+        </div>
+        <div class="field-group">
           <label>final slide extra text</label>
-          <input type="text" id="finalExtra" value="">
+          <input type="text" id="finalExtra" value="𐙚 forever yours 𐙚">
         </div>
         
         <button class="save-btn" id="saveBtn">save changes</button>
@@ -533,30 +597,40 @@
       // PASSCODE: sharemali-sm
       // ==============================================
       
-      // default content
+      // default content with all the new question types
       const defaultContent = {
         slide1Title: "cozy day",
         slide1Message: "you wrap me like a warm teddy",
         slide2Title: "sweetest soul",
         slide2Message: "every hug feels like home",
-        slide3Question: "shall we share honey sandwiches?",
-        slide4Question: "will you build a fort with me?",
-        slide5Question: "can we watch the rain with cocoa?",
-        slide6Question: "shall we dance with our teddies?",
-        slide7Question: "will you read me a story?",
-        slide8Question: "can we stay in pajamas?",
-        slide3Title: "teddy picnic",
-        slide4Title: "fluffy dreams",
-        slide5Title: "cuddle weather",
-        slide6Title: "bearhug",
-        slide7Title: "soft blanket",
-        slide8Title: "forever snuggles",
-        finalExtra: "𐙚 with teddy 𐙚"
+        slide3Title: "question one",
+        slide3Question: "do you like honey?",
+        slide4Title: "question two",
+        slide4Question: "do you like cuddles?",
+        slide5Title: "question three",
+        slide5Question: "how much do you love me?",
+        slide5Option1: "a little",
+        slide5Option2: "a lot",
+        slide6Title: "beverage time",
+        slide6Question: "what's your favorite drink?",
+        slide6Option1: "coffee",
+        slide6Option2: "tea",
+        slide6Option3: "other",
+        slide7Title: "anime taste",
+        slide7Question: "which anime do you prefer?",
+        slide7Option1: "jujutsu kaisen",
+        slide7Option2: "attack on titan",
+        slide7Option3: "other",
+        slide8Title: "final question",
+        slide8Question: "who has my heart?",
+        slide8Option1: "you",
+        slide8Option2: "you",
+        finalExtra: "𐙚 forever yours 𐙚"
       };
 
       // load from localStorage or use defaults
       function loadContent() {
-        const saved = localStorage.getItem('teddyContent');
+        const saved = localStorage.getItem('teddyContentAdvanced');
         if (saved) {
           try {
             return JSON.parse(saved);
@@ -571,7 +645,7 @@
 
       // save to localStorage
       function saveContent(newContent) {
-        localStorage.setItem('teddyContent', JSON.stringify(newContent));
+        localStorage.setItem('teddyContentAdvanced', JSON.stringify(newContent));
         content = newContent;
       }
 
@@ -582,12 +656,12 @@
         return [
           { type: 'duo', title: content.slide1Title, message: content.slide1Message, bear: 'teddy-hug' },
           { type: 'duo', title: content.slide2Title, message: content.slide2Message, bear: 'teddy-love' },
-          { type: 'question', title: content.slide3Title, question: content.slide3Question, bear: 'teddy-hug' },
-          { type: 'question', title: content.slide4Title, question: content.slide4Question, bear: 'teddy-love' },
-          { type: 'question', title: content.slide5Title, question: content.slide5Question, bear: 'teddy-hug' },
-          { type: 'question', title: content.slide6Title, question: content.slide6Question, bear: 'teddy-love' },
-          { type: 'question', title: content.slide7Title, question: content.slide7Question, bear: 'teddy-hug' },
-          { type: 'question', title: content.slide8Title, question: content.slide8Question, bear: 'teddy-love' },
+          { type: 'yesno', title: content.slide3Title, question: content.slide3Question, bear: 'teddy-hug' },
+          { type: 'yesno', title: content.slide4Title, question: content.slide4Question, bear: 'teddy-love' },
+          { type: 'yesyes', title: content.slide5Title, question: content.slide5Question, option1: content.slide5Option1, option2: content.slide5Option2, bear: 'teddy-hug' },
+          { type: 'threeway', title: content.slide6Title, question: content.slide6Question, option1: content.slide6Option1, option2: content.slide6Option2, option3: content.slide6Option3, bear: 'teddy-love' },
+          { type: 'threeway', title: content.slide7Title, question: content.slide7Question, option1: content.slide7Option1, option2: content.slide7Option2, option3: content.slide7Option3, bear: 'teddy-hug' },
+          { type: 'youyou', title: content.slide8Title, question: content.slide8Question, option1: content.slide8Option1, option2: content.slide8Option2, bear: 'teddy-love' },
           { type: 'final', extra: content.finalExtra }
         ];
       }
@@ -612,27 +686,65 @@
       const slide1Message = document.getElementById('slide1Message');
       const slide2Title = document.getElementById('slide2Title');
       const slide2Message = document.getElementById('slide2Message');
+      const slide3Title = document.getElementById('slide3Title');
       const slide3Question = document.getElementById('slide3Question');
+      const slide4Title = document.getElementById('slide4Title');
       const slide4Question = document.getElementById('slide4Question');
+      const slide5Title = document.getElementById('slide5Title');
       const slide5Question = document.getElementById('slide5Question');
+      const slide5Option1 = document.getElementById('slide5Option1');
+      const slide5Option2 = document.getElementById('slide5Option2');
+      const slide6Title = document.getElementById('slide6Title');
       const slide6Question = document.getElementById('slide6Question');
+      const slide6Option1 = document.getElementById('slide6Option1');
+      const slide6Option2 = document.getElementById('slide6Option2');
+      const slide6Option3 = document.getElementById('slide6Option3');
+      const slide7Title = document.getElementById('slide7Title');
       const slide7Question = document.getElementById('slide7Question');
+      const slide7Option1 = document.getElementById('slide7Option1');
+      const slide7Option2 = document.getElementById('slide7Option2');
+      const slide7Option3 = document.getElementById('slide7Option3');
+      const slide8Title = document.getElementById('slide8Title');
       const slide8Question = document.getElementById('slide8Question');
+      const slide8Option1 = document.getElementById('slide8Option1');
+      const slide8Option2 = document.getElementById('slide8Option2');
       const finalExtra = document.getElementById('finalExtra');
+
+      // Check if all elements exist before using them
+      if (!stage || !btnCluster || !pawDots || !modal || !editBtn || !closeModal || !unlockBtn || !passwordInput || !editorFields || !saveBtn) {
+        console.error('Critical elements missing!');
+        return;
+      }
 
       // populate form with current content
       function populateForm() {
-        slide1Title.value = content.slide1Title || '';
-        slide1Message.value = content.slide1Message || '';
-        slide2Title.value = content.slide2Title || '';
-        slide2Message.value = content.slide2Message || '';
-        slide3Question.value = content.slide3Question || '';
-        slide4Question.value = content.slide4Question || '';
-        slide5Question.value = content.slide5Question || '';
-        slide6Question.value = content.slide6Question || '';
-        slide7Question.value = content.slide7Question || '';
-        slide8Question.value = content.slide8Question || '';
-        finalExtra.value = content.finalExtra || '';
+        if (slide1Title) slide1Title.value = content.slide1Title || '';
+        if (slide1Message) slide1Message.value = content.slide1Message || '';
+        if (slide2Title) slide2Title.value = content.slide2Title || '';
+        if (slide2Message) slide2Message.value = content.slide2Message || '';
+        if (slide3Title) slide3Title.value = content.slide3Title || '';
+        if (slide3Question) slide3Question.value = content.slide3Question || '';
+        if (slide4Title) slide4Title.value = content.slide4Title || '';
+        if (slide4Question) slide4Question.value = content.slide4Question || '';
+        if (slide5Title) slide5Title.value = content.slide5Title || '';
+        if (slide5Question) slide5Question.value = content.slide5Question || '';
+        if (slide5Option1) slide5Option1.value = content.slide5Option1 || '';
+        if (slide5Option2) slide5Option2.value = content.slide5Option2 || '';
+        if (slide6Title) slide6Title.value = content.slide6Title || '';
+        if (slide6Question) slide6Question.value = content.slide6Question || '';
+        if (slide6Option1) slide6Option1.value = content.slide6Option1 || '';
+        if (slide6Option2) slide6Option2.value = content.slide6Option2 || '';
+        if (slide6Option3) slide6Option3.value = content.slide6Option3 || '';
+        if (slide7Title) slide7Title.value = content.slide7Title || '';
+        if (slide7Question) slide7Question.value = content.slide7Question || '';
+        if (slide7Option1) slide7Option1.value = content.slide7Option1 || '';
+        if (slide7Option2) slide7Option2.value = content.slide7Option2 || '';
+        if (slide7Option3) slide7Option3.value = content.slide7Option3 || '';
+        if (slide8Title) slide8Title.value = content.slide8Title || '';
+        if (slide8Question) slide8Question.value = content.slide8Question || '';
+        if (slide8Option1) slide8Option1.value = content.slide8Option1 || '';
+        if (slide8Option2) slide8Option2.value = content.slide8Option2 || '';
+        if (finalExtra) finalExtra.value = content.finalExtra || '';
       }
 
       editBtn.addEventListener('click', () => {
@@ -656,23 +768,33 @@
 
       saveBtn.addEventListener('click', () => {
         const newContent = {
-          slide1Title: slide1Title.value,
-          slide1Message: slide1Message.value,
-          slide2Title: slide2Title.value,
-          slide2Message: slide2Message.value,
-          slide3Title: content.slide3Title, // preserve titles or you can add fields for them too
-          slide4Title: content.slide4Title,
-          slide5Title: content.slide5Title,
-          slide6Title: content.slide6Title,
-          slide7Title: content.slide7Title,
-          slide8Title: content.slide8Title,
-          slide3Question: slide3Question.value,
-          slide4Question: slide4Question.value,
-          slide5Question: slide5Question.value,
-          slide6Question: slide6Question.value,
-          slide7Question: slide7Question.value,
-          slide8Question: slide8Question.value,
-          finalExtra: finalExtra.value
+          slide1Title: slide1Title ? slide1Title.value : '',
+          slide1Message: slide1Message ? slide1Message.value : '',
+          slide2Title: slide2Title ? slide2Title.value : '',
+          slide2Message: slide2Message ? slide2Message.value : '',
+          slide3Title: slide3Title ? slide3Title.value : '',
+          slide3Question: slide3Question ? slide3Question.value : '',
+          slide4Title: slide4Title ? slide4Title.value : '',
+          slide4Question: slide4Question ? slide4Question.value : '',
+          slide5Title: slide5Title ? slide5Title.value : '',
+          slide5Question: slide5Question ? slide5Question.value : '',
+          slide5Option1: slide5Option1 ? slide5Option1.value : '',
+          slide5Option2: slide5Option2 ? slide5Option2.value : '',
+          slide6Title: slide6Title ? slide6Title.value : '',
+          slide6Question: slide6Question ? slide6Question.value : '',
+          slide6Option1: slide6Option1 ? slide6Option1.value : '',
+          slide6Option2: slide6Option2 ? slide6Option2.value : '',
+          slide6Option3: slide6Option3 ? slide6Option3.value : '',
+          slide7Title: slide7Title ? slide7Title.value : '',
+          slide7Question: slide7Question ? slide7Question.value : '',
+          slide7Option1: slide7Option1 ? slide7Option1.value : '',
+          slide7Option2: slide7Option2 ? slide7Option2.value : '',
+          slide7Option3: slide7Option3 ? slide7Option3.value : '',
+          slide8Title: slide8Title ? slide8Title.value : '',
+          slide8Question: slide8Question ? slide8Question.value : '',
+          slide8Option1: slide8Option1 ? slide8Option1.value : '',
+          slide8Option2: slide8Option2 ? slide8Option2.value : '',
+          finalExtra: finalExtra ? finalExtra.value : ''
         };
         
         saveContent(newContent);
@@ -683,6 +805,8 @@
       });
 
       function showSlide() {
+        if (!stage) return;
+        
         stage.style.opacity = '0';
         stage.style.transform = 'scale(0.95) rotate(-0.5deg)';
 
@@ -711,19 +835,19 @@
               <div class="big-teddy ${s.bear}"></div>
               <h3>${s.title}</h3>
               <div class="teddy-message" style="font-size:2.2rem;">${s.question}</div>
-              <div style="font-size:2rem; margin-top:0.5rem;">𖹭</div>
             `;
           }
 
           stage.innerHTML = html;
           stage.style.opacity = '1';
           stage.style.transform = 'scale(1) rotate(0deg)';
+          updateControlsAndDots();
         }, 200);
-
-        updateControlsAndDots();
       }
 
       function updateControlsAndDots() {
+        if (!btnCluster || !pawDots) return;
+        
         let btnHtml = '';
 
         if (currentSlide === 8) {
@@ -737,15 +861,39 @@
             <button class="btn" id="nextBtn">next ▸</button>
           `;
         } else {
-          btnHtml = `
-            <button class="btn btn-yes" id="yesBtn">yes 🩷</button>
-            <button class="btn btn-no" id="noBtn">no 🩶</button>
-            <button class="btn" id="prevBtn">◂ back</button>
-          `;
+          const s = slides[currentSlide];
+          
+          if (s.type === 'yesno') {
+            btnHtml = `
+              <button class="btn btn-yes" id="yesBtn">yes 🩷</button>
+              <button class="btn btn-no" id="noBtn">no 🩶</button>
+              <button class="btn" id="prevBtn">◂ back</button>
+            `;
+          } else if (s.type === 'yesyes') {
+            btnHtml = `
+              <button class="btn btn-yes" id="option1Btn">${s.option1} 🧸</button>
+              <button class="btn btn-yes" id="option2Btn">${s.option2} 🧸</button>
+              <button class="btn" id="prevBtn">◂ back</button>
+            `;
+          } else if (s.type === 'threeway') {
+            btnHtml = `
+              <button class="btn" id="opt1Btn">${s.option1}</button>
+              <button class="btn" id="opt2Btn">${s.option2}</button>
+              <button class="btn" id="opt3Btn">${s.option3}</button>
+              <button class="btn" id="prevBtn">◂ back</button>
+            `;
+          } else if (s.type === 'youyou') {
+            btnHtml = `
+              <button class="btn btn-yes" id="you1Btn">${s.option1} 💖</button>
+              <button class="btn btn-yes" id="you2Btn">${s.option2} 💖</button>
+              <button class="btn" id="prevBtn">◂ back</button>
+            `;
+          }
         }
 
         btnCluster.innerHTML = btnHtml;
 
+        // attach event listeners with null checks
         const prev = document.getElementById('prevBtn');
         if (prev) prev.addEventListener('click', () => {
           if (currentSlide > 0) { currentSlide--; showSlide(); }
@@ -756,13 +904,48 @@
           if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
         });
 
-        const yes = document.getElementById('yesBtn');
-        if (yes) yes.addEventListener('click', () => {
+        const yesBtn = document.getElementById('yesBtn');
+        if (yesBtn) yesBtn.addEventListener('click', () => {
           if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
         });
 
-        const no = document.getElementById('noBtn');
-        if (no) no.addEventListener('click', () => {
+        const noBtn = document.getElementById('noBtn');
+        if (noBtn) noBtn.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt1Btn = document.getElementById('option1Btn');
+        if (opt1Btn) opt1Btn.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt2Btn = document.getElementById('option2Btn');
+        if (opt2Btn) opt2Btn.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt1 = document.getElementById('opt1Btn');
+        if (opt1) opt1.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt2 = document.getElementById('opt2Btn');
+        if (opt2) opt2.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt3 = document.getElementById('opt3Btn');
+        if (opt3) opt3.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const you1 = document.getElementById('you1Btn');
+        if (you1) you1.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const you2 = document.getElementById('you2Btn');
+        if (you2) you2.addEventListener('click', () => {
           if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
         });
 
@@ -786,7 +969,7 @@
       extraBear.style.top = '55%';
       extraBear.style.left = '28%';
       extraBear.style.animation = 'floatTeddy 29s infinite';
-      document.querySelector('.icon-float-cloud').appendChild(extraBear);
+      document.querySelector('.icon-float-cloud')?.appendChild(extraBear);
     })();
   </script>
 </body>
