@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>teddy hugs · for muffina 🧸</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Nunito', 'Segoe UI', 'Helvetica Neue', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+      transition: background 0.5s ease;
+      background: #f5ebe8;
+      background: radial-gradient(circle at 10% 30%, #ffded3, transparent 30%),
+                  radial-gradient(circle at 90% 70%, #f8e3cf, transparent 40%),
+                  linear-gradient(125deg, #fde9e1, #fbebdf);
+    }
+
+    /* main frame */
+    .teddy-frame {
+      max-width: 1000px;
+      width: 100%;
+      backdrop-filter: blur(16px) saturate(200%);
+      -webkit-backdrop-filter: blur(16px) saturate(200%);
+      border-radius: 70px 70px 60px 60px;
+      border: 3px solid rgba(235, 195, 175, 0.6);
+      box-shadow: 0 40px 60px rgba(170, 120, 90, 0.25),
+                  0 20px 30px #ffe3d6,
+                  inset 0 5px 15px #fff6ed;
+      overflow: hidden;
+      padding: 2.2rem 2rem 1.8rem;
+      position: relative;
+      transition: background 0.4s, border-color 0.4s, box-shadow 0.4s;
+      background: rgba(255, 246, 235, 0.75);
+    }
+
+    /* floating teddy icons */
+    .icon-float-cloud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .teddy-icon {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      opacity: 0.2;
+      filter: drop-shadow(0 8px 10px rgba(180, 120, 80, 0.2));
+      animation: drift 18s infinite alternate ease-in-out;
+    }
+
+    .teddy-icon::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #b98e7c;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+    }
+
+    .icon-bear1::after {
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="45" r="32" fill="black"/><circle cx="30" cy="35" r="10" fill="black"/><circle cx="70" cy="35" r="10" fill="black"/><circle cx="40" cy="50" r="5" fill="white"/><circle cx="60" cy="50" r="5" fill="white"/><ellipse cx="50" cy="70" r="6" ry="10" fill="black"/></svg>');
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="45" r="32" fill="black"/><circle cx="30" cy="35" r="10" fill="black"/><circle cx="70" cy="35" r="10" fill="black"/><circle cx="40" cy="50" r="5" fill="white"/><circle cx="60" cy="50" r="5" fill="white"/><ellipse cx="50" cy="70" r="6" ry="10" fill="black"/></svg>');
+    }
+
+    .icon-bear2::after {
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="48" r="28" fill="black"/><circle cx="30" cy="35" r="9" fill="black"/><circle cx="70" cy="35" r="9" fill="black"/><circle cx="42" cy="48" r="4" fill="white"/><circle cx="58" cy="48" r="4" fill="white"/><path d="M40 70 Q50 82, 60 70" stroke="black" stroke-width="5" fill="none"/></svg>');
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="48" r="28" fill="black"/><circle cx="30" cy="35" r="9" fill="black"/><circle cx="70" cy="35" r="9" fill="black"/><circle cx="42" cy="48" r="4" fill="white"/><circle cx="58" cy="48" r="4" fill="white"/><path d="M40 70 Q50 82, 60 70" stroke="black" stroke-width="5" fill="none"/></svg>');
+    }
+
+    .icon-bear3::after {
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="44" r="30" fill="black"/><circle cx="28" cy="32" r="8" fill="black"/><circle cx="72" cy="32" r="8" fill="black"/><circle cx="42" cy="46" r="5" fill="white"/><circle cx="58" cy="46" r="5" fill="white"/><circle cx="50" cy="70" r="6" fill="black"/></svg>');
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="44" r="30" fill="black"/><circle cx="28" cy="32" r="8" fill="black"/><circle cx="72" cy="32" r="8" fill="black"/><circle cx="42" cy="46" r="5" fill="white"/><circle cx="58" cy="46" r="5" fill="white"/><circle cx="50" cy="70" r="6" fill="black"/></svg>');
+    }
+
+    .icon-bear4::after {
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="48" r="30" fill="black"/><circle cx="32" cy="32" r="9" fill="black"/><circle cx="68" cy="32" r="9" fill="black"/><circle cx="42" cy="48" r="4" fill="white"/><circle cx="58" cy="48" r="4" fill="white"/><ellipse cx="50" cy="72" rx="8" ry="5" fill="black"/></svg>');
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="48" r="30" fill="black"/><circle cx="32" cy="32" r="9" fill="black"/><circle cx="68" cy="32" r="9" fill="black"/><circle cx="42" cy="48" r="4" fill="white"/><circle cx="58" cy="48" r="4" fill="white"/><ellipse cx="50" cy="72" rx="8" ry="5" fill="black"/></svg>');
+    }
+
+    .t1 { top: 15%; left: 8%; animation: floatTeddy 22s infinite; }
+    .t2 { top: 70%; left: 82%; animation: floatTeddy 25s reverse; }
+    .t3 { top: 25%; left: 75%; animation: floatTeddy 19s infinite; }
+    .t4 { top: 80%; left: 12%; animation: floatTeddy 28s reverse; }
+    .t5 { top: 45%; left: 45%; animation: floatTeddy 21s infinite; opacity: 0.3; }
+    .t6 { top: 10%; left: 55%; animation: floatTeddy 24s reverse; }
+
+    @keyframes floatTeddy {
+      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+      30% { transform: translate(20px, -25px) rotate(8deg) scale(1.1); }
+      70% { transform: translate(-20px, 20px) rotate(-5deg) scale(0.95); }
+      100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+    }
+
+    /* slide stage */
+    .slide-stage {
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: rgba(255, 245, 235, 0.3);
+      border-radius: 100px;
+      padding: 2rem 2rem;
+      margin-bottom: 0.5rem;
+      border: 1px dashed #eccbbd;
+    }
+
+    .big-teddy {
+      width: 120px;
+      height: 120px;
+      margin: 1rem auto;
+      background: #cb9e88;
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      filter: drop-shadow(0 15px 15px #dbb6a3);
+      animation: wobble 4s infinite alternate;
+    }
+
+    .teddy-hug {
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="30" fill="black"/><circle cx="28" cy="28" r="10" fill="black"/><circle cx="72" cy="28" r="10" fill="black"/><circle cx="38" cy="42" r="4" fill="white"/><circle cx="62" cy="42" r="4" fill="white"/><ellipse cx="50" cy="68" rx="8" ry="12" fill="black"/><path d="M25 70 Q35 90, 45 80" stroke="black" stroke-width="5" fill="none"/><path d="M75 70 Q65 90, 55 80" stroke="black" stroke-width="5" fill="none"/></svg>');
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="30" fill="black"/><circle cx="28" cy="28" r="10" fill="black"/><circle cx="72" cy="28" r="10" fill="black"/><circle cx="38" cy="42" r="4" fill="white"/><circle cx="62" cy="42" r="4" fill="white"/><ellipse cx="50" cy="68" rx="8" ry="12" fill="black"/><path d="M25 70 Q35 90, 45 80" stroke="black" stroke-width="5" fill="none"/><path d="M75 70 Q65 90, 55 80" stroke="black" stroke-width="5" fill="none"/></svg>');
+    }
+
+    .teddy-love {
+      mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="28" fill="black"/><circle cx="30" cy="30" r="9" fill="black"/><circle cx="70" cy="30" r="9" fill="black"/><circle cx="42" cy="42" r="4" fill="white"/><circle cx="58" cy="42" r="4" fill="white"/><path d="M40 70 Q50 85, 60 70" stroke="black" stroke-width="5" fill="none"/><path d="M20 55 L35 45 L50 55 L65 45 L80 55" stroke="black" stroke-width="4" fill="none"/></svg>');
+      -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="40" r="28" fill="black"/><circle cx="30" cy="30" r="9" fill="black"/><circle cx="70" cy="30" r="9" fill="black"/><circle cx="42" cy="42" r="4" fill="white"/><circle cx="58" cy="42" r="4" fill="white"/><path d="M40 70 Q50 85, 60 70" stroke="black" stroke-width="5" fill="none"/><path d="M20 55 L35 45 L50 55 L65 45 L80 55" stroke="black" stroke-width="4" fill="none"/></svg>');
+    }
+
+    @keyframes wobble {
+      0% { transform: rotate(-2deg) scale(1); }
+      100% { transform: rotate(2deg) scale(1.05); }
+    }
+
+    h2, h3 {
+      font-weight: 400;
+      color: #6f4e3c;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 3.5rem;
+      background: linear-gradient(145deg, #b47b64, #8f5e4b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    h3 {
+      font-size: 3rem;
+      color: #9b6f5b;
+      font-weight: 350;
+    }
+
+    .teddy-message {
+      background: #f8e4da;
+      padding: 1rem 2.5rem;
+      border-radius: 80px;
+      font-size: 2rem;
+      color: #6f4e3e;
+      border: 3px solid #eacbbb;
+      box-shadow: 0 8px 18px #e7c4b2;
+      margin: 1.2rem;
+      backdrop-filter: blur(5px);
+    }
+
+    .button-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin: 2rem 0 1rem;
+      z-index: 15;
+      position: relative;
+    }
+
+    .btn {
+      background: #f2ddd0;
+      border: 3px solid #e2bcaa;
+      padding: 1rem 2.8rem;
+      border-radius: 60px;
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #7c5846;
+      box-shadow: 0 15px 25px #eccbbb, 0 5px 10px #f4e1d4;
+      cursor: pointer;
+      transition: 0.2s;
+      min-width: 160px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .btn:hover {
+      background: #f6cfbf;
+      border-color: #d69378;
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 25px 30px #d9aa93;
+    }
+
+    .btn-yes {
+      background: #fbddd3;
+      border-color: #cf8f77;
+    }
+
+    .btn-no {
+      background: #ecd9d2;
+      border-color: #b99280;
+    }
+
+    .paw-dots {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 1.8rem 0 0.5rem;
+    }
+
+    .paw {
+      width: 22px;
+      height: 22px;
+      background: #dbb7a7;
+      border-radius: 50% 50% 40% 40%;
+      box-shadow: 0 4px 8px #e6b7a2;
+      transition: 0.3s;
+      border: 2px solid #ffeae1;
+    }
+
+    .paw.active {
+      background: #ac6e57;
+      width: 48px;
+      border-radius: 40px;
+      box-shadow: 0 0 0 6px #f5cfc2;
+    }
+
+    .great-day-panel {
+      background: #fbe6db;
+      border-radius: 120px;
+      padding: 2.5rem 3.5rem;
+      border: 6px double #e4aa93;
+      animation: gentleHug 3s infinite;
+    }
+
+    @keyframes gentleHug {
+      0%,100% { transform: scale(1); box-shadow: 0 20px 40px #eecbb8; }
+      50% { transform: scale(1.02); box-shadow: 0 25px 45px #dba28b; }
+    }
+
+    .great-day-text {
+      font-size: 4rem;
+      font-family: 'Pacifico', cursive;
+      background: linear-gradient(135deg, #b88068, #9c604a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ShareMali Serv8 watermark */
+    .watermark {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size:30px;
+      color: rgba(139, 94, 75, 0.3);
+      font-family: 'Nunito', sans-serif;
+      letter-spacing: 1px;
+      pointer-events: none;
+      z-index: 20;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600&family=Pacifico&family=Quicksand:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="teddy-frame">
+    <!-- floating teddy icons -->
+    <div class="icon-float-cloud">
+      <span class="teddy-icon icon-bear1 t1"></span>
+      <span class="teddy-icon icon-bear2 t2"></span>
+      <span class="teddy-icon icon-bear3 t3"></span>
+      <span class="teddy-icon icon-bear4 t4"></span>
+      <span class="teddy-icon icon-bear1 t5"></span>
+      <span class="teddy-icon icon-bear2 t6"></span>
+    </div>
+
+    <!-- slide container -->
+    <div class="slide-stage" id="slideStage"></div>
+    <div class="button-cluster" id="buttonCluster"></div>
+    <div class="paw-dots" id="pawDots"></div>
+    
+    <!-- ShareMali Serv8 watermark -->
+    <br>
+    <div class="watermark">ShareMali Serv8</div>
+  </div>
+
+  <script>
+    (function() {
+      // ==============================================
+      // YOUR CUSTOM QUESTIONS FOR MUFFINA
+      // ==============================================
+      
+      const content = {
+        slide1Title: "Muffina ",
+        slide1Message: "I made something for you, I hope you like it ❤️",
+        slide2Title: "sweetest soul ✨",
+        slide2Message: "I enjoy playing mlbb with you more than you think 🎀",
+        slide3Title: "question one",
+        slide3Question: "Playing together is great..., what about matching our profiles?! 😇 ✨",
+        slide4Title: "question two",
+        slide4Question: "Do you think we are a good duo?",
+        slide5Title: "question three",
+        slide5Question: "Would you miss me if I disappeared for one day? 😇",
+        slide5Option1: "yes 😁 ✨",
+        slide5Option2: "of course yes 😂",
+        slide6Title: "beverage time",
+        slide6Question: "what's your favorite drink?",
+        slide6Option1: "coffee",
+        slide6Option2: "tea",
+        slide6Option3: "other",
+        slide7Title: "anime taste",
+        slide7Question: "which anime do you prefer?",
+        slide7Option1: "jujutsu kaisen",
+        slide7Option2: "attack on titan",
+        slide7Option3: "other",
+        slide8Title: "final question",
+        slide8Question: "Who's the prettiest and kindest girl in the world?! 🎀",
+        slide8Option1: "you ✨",
+        slide8Option2: "you ✨",
+        finalExtra: "𐤚 I'm glad I meet you 𐤚"
+      };
+
+      const totalSlides = 9;
+      let currentSlide = 0;
+
+      function buildSlidesFromContent() {
+        return [
+          { type: 'duo', title: content.slide1Title, message: content.slide1Message, bear: 'teddy-hug' },
+          { type: 'duo', title: content.slide2Title, message: content.slide2Message, bear: 'teddy-love' },
+          { type: 'yesno', title: content.slide3Title, question: content.slide3Question, bear: 'teddy-hug' },
+          { type: 'yesno', title: content.slide4Title, question: content.slide4Question, bear: 'teddy-love' },
+          { type: 'yesyes', title: content.slide5Title, question: content.slide5Question, option1: content.slide5Option1, option2: content.slide5Option2, bear: 'teddy-hug' },
+          { type: 'threeway', title: content.slide6Title, question: content.slide6Question, option1: content.slide6Option1, option2: content.slide6Option2, option3: content.slide6Option3, bear: 'teddy-love' },
+          { type: 'threeway', title: content.slide7Title, question: content.slide7Question, option1: content.slide7Option1, option2: content.slide7Option2, option3: content.slide7Option3, bear: 'teddy-hug' },
+          { type: 'youyou', title: content.slide8Title, question: content.slide8Question, option1: content.slide8Option1, option2: content.slide8Option2, bear: 'teddy-love' },
+          { type: 'final', extra: content.finalExtra }
+        ];
+      }
+
+      let slides = buildSlidesFromContent();
+
+      const stage = document.getElementById('slideStage');
+      const btnCluster = document.getElementById('buttonCluster');
+      const pawDots = document.getElementById('pawDots');
+
+      function showSlide() {
+        if (!stage) return;
+        
+        stage.style.opacity = '0';
+        stage.style.transform = 'scale(0.95) rotate(-0.5deg)';
+
+        setTimeout(() => {
+          const s = slides[currentSlide];
+          let html = '';
+
+          if (currentSlide === 8) {
+            html = `
+              <div class="great-day-panel">
+                <div class="big-teddy teddy-hug" style="width:140px; height:140px; margin:0 auto 1rem;"></div>
+                <div class="great-day-text">Have a great day</div>
+                <div style="font-size: 2.2rem; margin:1rem 0; color:#956b56;">${s.extra}</div>
+                <div class="big-teddy teddy-love" style="width:100px; height:100px;"></div>
+              </div>
+            `;
+          } else if (s.type === 'duo') {
+            html = `
+              <div class="big-teddy ${s.bear}"></div>
+              <h2>${s.title}</h2>
+              <div class="teddy-message">${s.message}</div>
+              <div style="font-size:2rem; margin:0.2rem;">🧸</div>
+            `;
+          } else {
+            html = `
+              <div class="big-teddy ${s.bear}"></div>
+              <h3>${s.title}</h3>
+              <div class="teddy-message" style="font-size:2.2rem;">${s.question}</div>
+            `;
+          }
+
+          stage.innerHTML = html;
+          stage.style.opacity = '1';
+          stage.style.transform = 'scale(1) rotate(0deg)';
+          updateControlsAndDots();
+        }, 200);
+      }
+
+      function updateControlsAndDots() {
+        if (!btnCluster || !pawDots) return;
+        
+        let btnHtml = '';
+
+        if (currentSlide === 8) {
+          btnHtml = `
+            <button class="btn" id="prevBtn">◂ prev</button>
+            <button class="btn" id="restartBtn">↻ start over</button>
+          `;
+        } else if (currentSlide === 0 || currentSlide === 1) {
+          btnHtml = `
+            <button class="btn" id="prevBtn">◂ prev</button>
+            <button class="btn" id="nextBtn">next ▸</button>
+          `;
+        } else {
+          const s = slides[currentSlide];
+          
+          if (s.type === 'yesno') {
+            btnHtml = `
+              <button class="btn btn-yes" id="yesBtn">yes 🩷</button>
+              <button class="btn btn-no" id="noBtn">no 🩶</button>
+              <button class="btn" id="prevBtn">◂ back</button>
+            `;
+          } else if (s.type === 'yesyes') {
+            btnHtml = `
+              <button class="btn btn-yes" id="option1Btn">${s.option1} 🧸</button>
+              <button class="btn btn-yes" id="option2Btn">${s.option2} 🧸</button>
+              <button class="btn" id="prevBtn">◂ back</button>
+            `;
+          } else if (s.type === 'threeway') {
+            btnHtml = `
+              <button class="btn" id="opt1Btn">${s.option1}</button>
+              <button class="btn" id="opt2Btn">${s.option2}</button>
+              <button class="btn" id="opt3Btn">${s.option3}</button>
+              <button class="btn" id="prevBtn">◂ back</button>
+            `;
+          } else if (s.type === 'youyou') {
+            btnHtml = `
+              <button class="btn btn-yes" id="you1Btn">${s.option1} 💖</button>
+              <button class="btn btn-yes" id="you2Btn">${s.option2} 💖</button>
+              <button class="btn" id="prevBtn">◂ back</button>
+            `;
+          }
+        }
+
+        btnCluster.innerHTML = btnHtml;
+
+        const prev = document.getElementById('prevBtn');
+        if (prev) prev.addEventListener('click', () => {
+          if (currentSlide > 0) { currentSlide--; showSlide(); }
+        });
+
+        const next = document.getElementById('nextBtn');
+        if (next) next.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const yesBtn = document.getElementById('yesBtn');
+        if (yesBtn) yesBtn.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const noBtn = document.getElementById('noBtn');
+        if (noBtn) noBtn.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt1Btn = document.getElementById('option1Btn');
+        if (opt1Btn) opt1Btn.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt2Btn = document.getElementById('option2Btn');
+        if (opt2Btn) opt2Btn.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt1 = document.getElementById('opt1Btn');
+        if (opt1) opt1.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt2 = document.getElementById('opt2Btn');
+        if (opt2) opt2.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const opt3 = document.getElementById('opt3Btn');
+        if (opt3) opt3.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const you1 = document.getElementById('you1Btn');
+        if (you1) you1.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const you2 = document.getElementById('you2Btn');
+        if (you2) you2.addEventListener('click', () => {
+          if (currentSlide < totalSlides - 1) { currentSlide++; showSlide(); }
+        });
+
+        const restart = document.getElementById('restartBtn');
+        if (restart) restart.addEventListener('click', () => {
+          currentSlide = 0; showSlide();
+        });
+
+        let dotsHtml = '';
+        for (let i = 0; i < totalSlides; i++) {
+          dotsHtml += `<span class="paw ${i === currentSlide ? 'active' : ''}"></span>`;
+        }
+        pawDots.innerHTML = dotsHtml;
+      }
+
+      showSlide();
+
+      // extra bear
+      const extraBear = document.createElement('span');
+      extraBear.className = 'teddy-icon icon-bear3';
+      extraBear.style.top = '55%';
+      extraBear.style.left = '28%';
+      extraBear.style.animation = 'floatTeddy 29s infinite';
+      document.querySelector('.icon-float-cloud')?.appendChild(extraBear);
+    })();
+  </script>
+</body>
+</html>
