@@ -594,10 +594,13 @@
   <script>
     (function() {
       // ==============================================
-      // PASSCODE: sharemali-sm
+      // CONNECT TO YOUR ANDROID SERVER VIA NGROK
       // ==============================================
       
-      // default content with all the new question types
+      // 🔴 IMPORTANT: REPLACE THIS WITH YOUR NGROK URL!
+      const serverUrl = 'https://504ad13308645c76-103-236-107-139.serveousercontent.com';  // <-- CHANGE THIS!
+      
+      // Default questions (fallback if server unreachable)
       const defaultContent = {
         slide1Title: "cozy day",
         slide1Message: "you wrap me like a warm teddy",
@@ -628,29 +631,65 @@
         finalExtra: "𐙚 forever yours 𐙚"
       };
 
-      // load from localStorage or use defaults
-      function loadContent() {
-        const saved = localStorage.getItem('teddyContentAdvanced');
-        if (saved) {
-          try {
-            return JSON.parse(saved);
-          } catch (e) {
-            return defaultContent;
-          }
-        }
-        return defaultContent;
-      }
-
-      let content = loadContent();
-
-      // save to localStorage
-      function saveContent(newContent) {
-        localStorage.setItem('teddyContentAdvanced', JSON.stringify(newContent));
-        content = newContent;
-      }
-
+      let content = { ...defaultContent };
+      let slides = [];
       const totalSlides = 9;
       let currentSlide = 0;
+
+      // Load from Android server
+      async function loadFromServer() {
+        try {
+          console.log("📡 Connecting to Android server...");
+          const response = await fetch(`${serverUrl}/api/questions`);
+          if (!response.ok) throw new Error('Server error');
+          const data = await response.json();
+          content = data;
+          slides = buildSlidesFromContent();
+          showSlide();
+          console.log("✅ Loaded from Android server!");
+        } catch (error) {
+          console.error("❌ Using local storage (server offline)", error);
+          // Fallback to localStorage
+          const saved = localStorage.getItem('teddyContentAdvanced');
+          if (saved) {
+            try {
+              content = JSON.parse(saved);
+            } catch (e) {
+              content = defaultContent;
+            }
+          }
+          slides = buildSlidesFromContent();
+          showSlide();
+        }
+      }
+
+      // Save to Android server
+      async function saveToServer(newContent) {
+        try {
+          // Add password
+          newContent.password = 'sharemali-sm';
+          
+          const response = await fetch(`${serverUrl}/api/questions`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newContent)
+          });
+          
+          const result = await response.json();
+          if (result.success) {
+            alert('✅ Questions updated for EVERYONE!');
+            return true;
+          } else {
+            alert('❌ Error: ' + (result.error || 'Unknown'));
+            return false;
+          }
+        } catch (error) {
+          alert('❌ Cannot connect to Android server. Using local save only.');
+          // Fallback to localStorage
+          localStorage.setItem('teddyContentAdvanced', JSON.stringify(newContent));
+          return true; // Consider it saved locally
+        }
+      }
 
       function buildSlidesFromContent() {
         return [
@@ -665,8 +704,6 @@
           { type: 'final', extra: content.finalExtra }
         ];
       }
-
-      let slides = buildSlidesFromContent();
 
       const stage = document.getElementById('slideStage');
       const btnCluster = document.getElementById('buttonCluster');
@@ -709,12 +746,6 @@
       const slide8Option1 = document.getElementById('slide8Option1');
       const slide8Option2 = document.getElementById('slide8Option2');
       const finalExtra = document.getElementById('finalExtra');
-
-      // Check if all elements exist before using them
-      if (!stage || !btnCluster || !pawDots || !modal || !editBtn || !closeModal || !unlockBtn || !passwordInput || !editorFields || !saveBtn) {
-        console.error('Critical elements missing!');
-        return;
-      }
 
       // populate form with current content
       function populateForm() {
@@ -766,7 +797,7 @@
         }
       });
 
-      saveBtn.addEventListener('click', () => {
+      saveBtn.addEventListener('click', async () => {
         const newContent = {
           slide1Title: slide1Title ? slide1Title.value : '',
           slide1Message: slide1Message ? slide1Message.value : '',
@@ -797,11 +828,14 @@
           finalExtra: finalExtra ? finalExtra.value : ''
         };
         
-        saveContent(newContent);
-        slides = buildSlidesFromContent();
-        currentSlide = 0;
-        showSlide();
-        modal.classList.remove('active');
+        const saved = await saveToServer(newContent);
+        if (saved) {
+          content = newContent;
+          slides = buildSlidesFromContent();
+          currentSlide = 0;
+          showSlide();
+          modal.classList.remove('active');
+        }
       });
 
       function showSlide() {
@@ -893,7 +927,6 @@
 
         btnCluster.innerHTML = btnHtml;
 
-        // attach event listeners with null checks
         const prev = document.getElementById('prevBtn');
         if (prev) prev.addEventListener('click', () => {
           if (currentSlide > 0) { currentSlide--; showSlide(); }
@@ -961,7 +994,8 @@
         pawDots.innerHTML = dotsHtml;
       }
 
-      showSlide();
+      // Start loading from server
+      loadFromServer();
 
       // extra bear
       const extraBear = document.createElement('span');
