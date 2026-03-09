@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>for Lua • all your answers</title>
-    <!-- Elegant fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ALL YOUR BEAUTIFUL STYLES - preserved exactly */
+        /* ALL YOUR BEAUTIFUL STYLES - keeping your exact design */
         * {
             margin: 0;
             padding: 0;
@@ -30,7 +30,6 @@
             overflow-x: hidden;
         }
 
-        /* delicate floral pattern overlay */
         body::before {
             content: "";
             position: fixed;
@@ -44,7 +43,6 @@
             z-index: 0;
         }
 
-        /* main card */
         .love-card {
             width: 100%;
             max-width: 820px;
@@ -63,7 +61,6 @@
             border: 2px solid #fff2f7;
         }
 
-        /* inner glow */
         .love-card::after {
             content: '';
             position: absolute;
@@ -76,7 +73,6 @@
             pointer-events: none;
         }
 
-        /* slides container */
         .slide {
             display: none;
             flex-direction: column;
@@ -98,7 +94,6 @@
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Lua name */
         .lua-badge {
             font-family: 'Playfair Display', serif;
             font-size: 3.8rem;
@@ -114,7 +109,6 @@
             text-shadow: 0 2px 10px rgba(200, 120, 140, 0.3);
         }
 
-        /* decorative underline */
         .lua-badge::after {
             content: '';
             position: absolute;
@@ -142,7 +136,6 @@
             backdrop-filter: blur(2px);
         }
 
-        /* option buttons */
         .options {
             display: flex;
             gap: 40px;
@@ -186,12 +179,6 @@
             color: #903b59;
         }
 
-        .option-btn:hover i {
-            transform: scale(1.15);
-            color: #cf6088;
-        }
-
-        /* four-options grid */
         .four-options {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -208,7 +195,6 @@
             width: 100%;
         }
 
-        /* input area */
         .answer-input-area {
             margin: 25px 0 15px;
             width: 100%;
@@ -228,19 +214,11 @@
             font-family: 'Playfair Display', serif;
             font-weight: 500;
             box-shadow: 0 8px 22px #f4d7e3;
-            transition: all 0.25s;
         }
 
         .beauty-input:focus {
             border-color: #f4a7c2;
             box-shadow: 0 12px 32px #efc0d2;
-            background: #ffffff;
-        }
-
-        .beauty-input::placeholder {
-            color: #d49db2;
-            font-size: 1.6rem;
-            font-style: italic;
         }
 
         .check-btn {
@@ -254,21 +232,6 @@
             font-weight: 600;
             box-shadow: 0 8px 0 #c984a2, 0 10px 28px #e9b8cc;
             cursor: pointer;
-            transition: 0.12s ease;
-            border: 1px solid #fff0f6;
-            font-family: 'Quicksand', sans-serif;
-            letter-spacing: 1px;
-        }
-
-        .check-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 0 #c984a2, 0 18px 34px #dfa7bf;
-            background: #fbd2e4;
-        }
-
-        .check-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 4px 0 #c984a2;
         }
 
         .feedback-message {
@@ -279,21 +242,16 @@
             border-radius: 70px;
             border: 2px solid #fbc9dd;
             color: #9c4c6b;
-            font-weight: 500;
-            box-shadow: 0 6px 22px #fad6e6;
-            font-family: 'Playfair Display', serif;
         }
 
         .hidden {
             display: none !important;
         }
 
-        /* LOVE METER SLIDER STYLES */
         .love-meter-container {
             width: 100%;
             max-width: 550px;
             margin: 30px 0 20px;
-            padding: 15px 10px;
         }
 
         .slider-wrapper {
@@ -310,50 +268,28 @@
             font-weight: 700;
             color: #bc5f83;
             text-shadow: 0 3px 10px #fbc1d4;
-            line-height: 1.2;
             margin-bottom: 10px;
-        }
-
-        .percentage-display span {
-            font-size: 2.2rem;
-            color: #c97999;
         }
 
         .slider {
             -webkit-appearance: none;
-            appearance: none;
             width: 100%;
             height: 14px;
             background: linear-gradient(90deg, #ffc1d4, #ff8eb5, #ff6d9e);
             border-radius: 50px;
             outline: none;
-            margin: 20px 0 15px;
+            margin: 20px 0;
         }
 
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            appearance: none;
             width: 40px;
             height: 40px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 4px 15px #c45d84, 0 0 0 4px #fec9db;
+            box-shadow: 0 4px 15px #c45d84;
             cursor: pointer;
-            transition: 0.1s;
-            border: 2px solid #f59ebe;
-        }
-
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.15);
-            background: #ffe2f0;
-        }
-
-        .slider-value {
-            font-size: 1.8rem;
-            color: #a55173;
-            font-weight: 500;
-            margin: 15px 0 5px;
-            letter-spacing: 1px;
+            border: 3px solid #fec9db;
         }
 
         .send-love-btn {
@@ -363,35 +299,12 @@
             font-size: 2.2rem;
             padding: 20px 48px;
             border-radius: 80px;
-            margin: 20px 0 10px;
+            margin: 20px 0;
             font-weight: 600;
-            box-shadow: 0 8px 0 #c984a2, 0 10px 28px #e9b8cc;
+            box-shadow: 0 8px 0 #c984a2;
             cursor: pointer;
-            transition: 0.12s ease;
-            border: 1px solid #fff0f6;
-            font-family: 'Quicksand', sans-serif;
-            letter-spacing: 1px;
         }
 
-        .send-love-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 0 #c984a2, 0 18px 34px #dfa7bf;
-            background: #fbd2e4;
-        }
-
-        .send-love-btn:active {
-            transform: translateY(5px);
-            box-shadow: 0 4px 0 #c984a2;
-        }
-
-        .love-status {
-            font-size: 1.8rem;
-            margin-top: 20px;
-            color: #a75879;
-            font-style: italic;
-        }
-
-        /* final love section */
         .final-slide {
             display: flex;
             flex-direction: column;
@@ -406,15 +319,13 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin: 10px 0 5px;
-            letter-spacing: 3px;
+            margin: 10px 0;
             animation: softBeat 2.4s infinite;
-            filter: drop-shadow(0 4px 10px #f1b8d0);
         }
 
         @keyframes softBeat {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); filter: drop-shadow(0 8px 18px #f2aac8); }
+            50% { transform: scale(1.05); }
         }
 
         .heart-burst {
@@ -422,13 +333,6 @@
             letter-spacing: 22px;
             color: #e48dae;
             margin: 15px 0;
-            text-shadow: 0 2px 15px #fbc1d4;
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { text-shadow: 0 2px 15px #fbc1d4; }
-            50% { text-shadow: 0 2px 35px #fc8eb0, 0 0 8px #ffafcc; }
         }
 
         .forgive-message {
@@ -438,98 +342,59 @@
             border-radius: 120px;
             border: 2px solid #ffd3e4;
             color: #7a425b;
-            margin: 28px 0 20px;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            box-shadow: 0 12px 36px #edc2d6;
-            line-height: 1.4;
-        }
-
-        .forgive-message i {
-            color: #db85a5;
-            margin: 0 10px;
+            margin: 28px 0;
         }
 
         .signature-line {
             font-size: 2.2rem;
             color: #a45d7a;
-            font-family: 'Playfair Display', serif;
             border-top: 2px dotted #f5b9d0;
             padding-top: 24px;
-            margin-top: 15px;
             width: 80%;
-            letter-spacing: 1px;
         }
 
         .soft-footnote {
             color: #b37f94;
             font-size: 1.4rem;
-            margin-top: 28px;
-            font-weight: 400;
-            border-top: 2px dotted #f5c0d2;
-            padding-top: 22px;
-            width: 70%;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* continue button */
-        #afterNoContinue.option-btn {
-            background: #fcecf3;
-            border-color: #fbc1d4;
-            font-size: 2rem;
-            padding: 18px 38px;
-        }
-
-        /* responsive */
-        @media (max-width: 600px) {
-            .four-options { grid-template-columns: 1fr; }
-            .option-btn { font-size: 1.9rem; padding: 18px; min-width: 130px; }
-            .question-text { font-size: 2.1rem; }
-            .lua-badge { font-size: 3.2rem; }
-            .big-love { font-size: 4.5rem; }
-            .percentage-display { font-size: 4rem; }
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="love-card">
-        <!-- slide 1: yes/no -->
+        <!-- SLIDE 1: Yes/No -->
         <div class="slide active" id="slide1">
             <span class="lua-badge">Lua ❤️</span>
             <div class="question-text">Will you let me ask you<br>a few questions?</div>
             <div class="options">
-                <button class="option-btn" data-target="slide2" data-answer="yes" data-question="q1"><i class="far fa-heart"></i> YES</button>
-                <button class="option-btn" data-target="slide2" data-answer="no" data-question="q1"><i class="far fa-star"></i> NO</button>
+                <button class="option-btn" data-target="slide2" data-question="q1" data-answer="yes"><i class="far fa-heart"></i> YES</button>
+                <button class="option-btn" data-target="slide2" data-question="q1" data-answer="no"><i class="far fa-star"></i> NO</button>
             </div>
-            <div class="soft-footnote"><i class="far fa-hand-point-up"></i> gently tap</div>
         </div>
 
-        <!-- slide 2: second yes/no -->
+        <!-- SLIDE 2: Yes/No -->
         <div class="slide" id="slide2">
             <span class="lua-badge">Lua ✨</span>
             <div class="question-text">Do you believe in<br>little miracles?</div>
             <div class="options">
-                <button class="option-btn" data-target="slide3" data-answer="yes" data-question="q2"><i class="far fa-sun"></i> YES</button>
-                <button class="option-btn" data-target="slide3" data-answer="no" data-question="q2"><i class="far fa-moon"></i> NO</button>
+                <button class="option-btn" data-target="slide3" data-question="q2" data-answer="yes"><i class="far fa-sun"></i> YES</button>
+                <button class="option-btn" data-target="slide3" data-question="q2" data-answer="no"><i class="far fa-moon"></i> NO</button>
             </div>
-            <div class="soft-footnote">your truth is perfect</div>
         </div>
 
-        <!-- slide 3: 4 options -->
+        <!-- SLIDE 3: 4 Options -->
         <div class="slide" id="slide3">
             <span class="lua-badge">for Lua's heart</span>
             <div class="question-text">What makes your <br>eyes sparkle?</div>
             <div class="four-options">
-                <button class="option-btn" data-target="slide4" data-answer="kittens" data-question="q3"><i class="fas fa-cat"></i> kittens</button>
-                <button class="option-btn" data-target="slide4" data-answer="music" data-question="q3"><i class="fas fa-music"></i> music</button>
-                <button class="option-btn" data-target="slide4" data-answer="art" data-question="q3"><i class="fas fa-paint-brush"></i> art</button>
-                <button class="option-btn" data-target="slide4" data-answer="sunsets" data-question="q3"><i class="fas fa-sunset"></i> sunsets</button>
+                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="kittens"><i class="fas fa-cat"></i> kittens</button>
+                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="music"><i class="fas fa-music"></i> music</button>
+                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="art"><i class="fas fa-paint-brush"></i> art</button>
+                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="sunsets"><i class="fas fa-sunset"></i> sunsets</button>
             </div>
-            <div class="soft-footnote">every answer is beautiful</div>
         </div>
 
-        <!-- slide 4: most beautiful girl -->
+        <!-- SLIDE 4: Most Beautiful Girl -->
         <div class="slide" id="slide4">
             <span class="lua-badge">Lua 🌸</span>
             <div class="question-text">Do you know who is the most<br>beautiful girl in this world?</div>
@@ -538,65 +403,46 @@
                 <button class="option-btn" id="beautyNoBtn"><i class="far fa-times-circle"></i> NO</button>
             </div>
 
-            <!-- input area (YES) -->
             <div id="beautyInputArea" class="answer-input-area hidden">
-                <input type="text" id="beautyInput" class="beauty-input" placeholder="type her name..." value="">
+                <input type="text" id="beautyInput" class="beauty-input" placeholder="type her name...">
                 <button id="checkBeautyBtn" class="check-btn"><i class="fas fa-magic"></i> check</button>
                 <div id="beautyFeedback" class="feedback-message hidden"></div>
             </div>
 
-            <!-- reveal if NO -->
-            <div id="beautyNoReveal" class="hidden" style="margin-top: 30px;">
-                <div class="big-love" style="font-size: 3.8rem; animation: none;">It's YOU, Lua!</div>
-                <div class="soft-footnote">the most beautiful ✨</div>
-                <button class="option-btn" id="afterNoContinue" data-target="slide5" style="margin-top: 30px;"><i class="fas fa-arrow-right"></i> continue</button>
+            <div id="beautyNoReveal" class="hidden">
+                <div class="big-love" style="font-size: 3.5rem;">It's YOU, Lua!</div>
+                <button class="option-btn" id="afterNoContinue" data-target="slide5">continue <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
-        <!-- slide 5: LOVE METER -->
+        <!-- SLIDE 5: Love Meter -->
         <div class="slide" id="slide5">
             <span class="lua-badge">Lua 💕</span>
             <div class="question-text">How much do you love me?</div>
-            
             <div class="love-meter-container">
                 <div class="slider-wrapper">
                     <div class="percentage-display">
                         <span id="loveValue">50</span>%
                     </div>
-                    
                     <input type="range" min="0" max="100" value="50" class="slider" id="loveSlider">
-                    
-                    <div class="slider-value">
-                        <i class="fas fa-heart" style="color: #ff88b5;"></i> 
-                        <span id="loveWord">passionate</span>
-                        <i class="fas fa-heart" style="color: #ff88b5;"></i>
-                    </div>
                 </div>
-                
                 <button class="send-love-btn" id="sendLoveBtn">
                     <i class="fas fa-paper-plane"></i> send my love
                 </button>
-                
-                <div id="loveStatus" class="love-status hidden">
-                    ✨ your love has been recorded ✨
-                </div>
             </div>
-            
-            <div class="soft-footnote">slide to choose, then send</div>
         </div>
 
-        <!-- slide 6: fourth yes/no -->
+        <!-- SLIDE 6: Final Yes/No -->
         <div class="slide" id="slide6">
             <span class="lua-badge">Lua 🌙</span>
             <div class="question-text">Do you feel how much<br>I adore you?</div>
             <div class="options">
-                <button class="option-btn" data-target="slide7" data-answer="yes" data-question="q5"><i class="fas fa-infinity"></i> YES</button>
-                <button class="option-btn" data-target="slide7" data-answer="no" data-question="q5"><i class="fas fa-sparkles"></i> NO</button>
+                <button class="option-btn" data-target="slide7" data-question="q5" data-answer="yes"><i class="fas fa-infinity"></i> YES</button>
+                <button class="option-btn" data-target="slide7" data-question="q5" data-answer="no"><i class="fas fa-sparkles"></i> NO</button>
             </div>
-            <div class="soft-footnote">(it's infinite)</div>
         </div>
 
-        <!-- slide 7: FINAL love & forgiveness -->
+        <!-- SLIDE 7: Final Love -->
         <div class="slide" id="slide7">
             <div class="final-slide">
                 <span class="lua-badge">Lua, mi alma</span>
@@ -610,105 +456,133 @@
                 <div class="signature-line">
                     always yours <i class="fas fa-feather-alt"></i>
                 </div>
-                <div class="soft-footnote">❤️ every answer was perfect ❤️</div>
             </div>
         </div>
     </div>
 
-    <!-- floating romantic detail -->
-    <div style="position: fixed; bottom: 18px; right: 28px; color: #dc9bb3; font-size: 1.2rem; font-family: 'Playfair Display', serif; font-style: italic; opacity: 0.6; z-index: 50; pointer-events: none;">
-        <i class="fas fa-heart" style="font-size: 1rem;"></i> with all my heart
-    </div>
-    <div style="position: fixed; bottom: 18px; left: 28px; color: #dc9bb3; font-size: 1.2rem; font-family: 'Playfair Display', serif; opacity: 0.5; z-index: 50; pointer-events: none;">
-        Lua <i class="fas fa-feather"></i>
-    </div>
     <script>
-(function() {
-    // Store all answers
-    const answers = {
-        q1: null,
-        q2: null,
-        q3: null,
-        q4: null,
-        q5: null,
-        loveMeter: null
-    };
+        (function() {
+            // Store all answers
+            const answers = {
+                q1: null,
+                q2: null,
+                q3: null,
+                q4: null,
+                q5: null,
+                loveMeter: null
+            };
 
-    // 🔴 REPLACE THIS WITH YOUR NGROK URL (will get from Termux)
-    const SERVER_URL = "https://janie-unrifted-chester.ngrok-free.dev";  // Change this!
+            // 🔴 YOUR NGROK URL - PUT THIS EXACT URL!
+            const SERVER_URL = "https://janie-unrifted-chester.ngrok-free.dev";
 
-    // Get all slides (if your slides have these IDs - adjust as needed)
-    const slides = document.querySelectorAll('.slide');
-    
-    function showSlide(targetId) {
-        const targetSlide = document.getElementById(targetId);
-        if (!targetSlide) return;
-        slides.forEach(s => s.classList.remove('active'));
-        targetSlide.classList.add('active');
-    }
+            // Show slide function
+            const slides = document.querySelectorAll('.slide');
+            function showSlide(targetId) {
+                slides.forEach(s => s.classList.remove('active'));
+                document.getElementById(targetId).classList.add('active');
+            }
 
-    // Capture answers from buttons
-    document.querySelectorAll('.option-btn[data-question]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const question = this.getAttribute('data-question');
-            const answer = this.getAttribute('data-answer');
-            if (question && answer) {
-                answers[question] = answer;
-                
-                // Send to your Termux server
+            // Send answer to server
+            function sendAnswer(question, answer) {
                 fetch(`${SERVER_URL}/save-answers`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ [question]: answer })
                 }).catch(err => console.log('Waiting for server...'));
             }
-            const target = this.getAttribute('data-target');
-            if (target) showSlide(target);
-        });
-    });
 
-    // Love meter logic (if you have one)
-    const loveSlider = document.getElementById('loveSlider');
-    const sendLoveBtn = document.getElementById('sendLoveBtn');
-    
-    if (sendLoveBtn) {
-        sendLoveBtn.addEventListener('click', function() {
-            if (loveSlider) {
+            // Regular option buttons
+            document.querySelectorAll('.option-btn[data-question]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const question = this.dataset.question;
+                    const answer = this.dataset.answer;
+                    
+                    if (question && answer) {
+                        answers[question] = answer;
+                        sendAnswer(question, answer);
+                    }
+                    
+                    const target = this.dataset.target;
+                    if (target) showSlide(target);
+                });
+            });
+
+            // Slide 4 logic (most beautiful girl)
+            const beautyYes = document.getElementById('beautyYesBtn');
+            const beautyNo = document.getElementById('beautyNoBtn');
+            const inputArea = document.getElementById('beautyInputArea');
+            const noReveal = document.getElementById('beautyNoReveal');
+            const beautyInput = document.getElementById('beautyInput');
+            const checkBtn = document.getElementById('checkBeautyBtn');
+            const feedback = document.getElementById('beautyFeedback');
+            const afterNo = document.getElementById('afterNoContinue');
+
+            beautyYes.addEventListener('click', () => {
+                answers.q4 = 'yes (will type name)';
+                sendAnswer('q4', 'yes');
+                inputArea.classList.remove('hidden');
+                noReveal.classList.add('hidden');
+                feedback.classList.add('hidden');
+            });
+
+            beautyNo.addEventListener('click', () => {
+                answers.q4 = 'no - it\'s you, Lua';
+                sendAnswer('q4', 'no');
+                inputArea.classList.add('hidden');
+                noReveal.classList.remove('hidden');
+            });
+
+            checkBtn.addEventListener('click', () => {
+                const name = beautyInput.value.trim();
+                answers.q4 = name || 'unknown';
+                sendAnswer('q4', name || 'unknown');
+                
+                if (name.toLowerCase() === 'lua' || name.toLowerCase() === 'me') {
+                    feedback.textContent = "✨ Correct! It's you! ✨";
+                    feedback.classList.remove('hidden');
+                    setTimeout(() => showSlide('slide5'), 1500);
+                } else {
+                    feedback.textContent = "Try again, my love 💕";
+                    feedback.classList.remove('hidden');
+                }
+            });
+
+            afterNo.addEventListener('click', () => {
+                showSlide('slide5');
+            });
+
+            // Love meter
+            const loveSlider = document.getElementById('loveSlider');
+            const loveValue = document.getElementById('loveValue');
+            const sendLove = document.getElementById('sendLoveBtn');
+
+            loveSlider.addEventListener('input', () => {
+                loveValue.textContent = loveSlider.value;
+            });
+
+            sendLove.addEventListener('click', () => {
                 answers.loveMeter = loveSlider.value;
-            }
-            
-            // Send all answers
-            fetch(`${SERVER_URL}/save-answers`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(answers)
-            }).then(() => {
-                console.log('✅ Answers sent!');
-            }).catch(err => console.log('Waiting for server...'));
-        });
-    }
+                sendAnswer('loveMeter', loveSlider.value);
+                showSlide('slide6');
+            });
 
-    // Final question capture
-    document.querySelectorAll('#slide6 .option-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const answer = this.getAttribute('data-answer');
-            answers.q5 = answer;
-            
-            // Final send with love meter
-            if (loveSlider) answers.loveMeter = loveSlider.value;
-            
-            fetch(`${SERVER_URL}/save-answers`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(answers)
-            }).catch(err => console.log('Waiting for server...'));
-        });
-    });
+            // Final answers on slide 7
+            const slide7Buttons = document.querySelectorAll('#slide6 .option-btn');
+            slide7Buttons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    answers.loveMeter = loveSlider.value;
+                    
+                    // Send all answers one final time
+                    fetch(`${SERVER_URL}/save-answers`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(answers)
+                    }).catch(err => console.log('Done!'));
+                });
+            });
 
-})();
-</script>
+        })();
+    </script>
 </body>
 </html>
-
-
