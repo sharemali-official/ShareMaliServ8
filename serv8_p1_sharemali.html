@@ -622,184 +622,92 @@
     <div style="position: fixed; bottom: 18px; left: 28px; color: #dc9bb3; font-size: 1.2rem; font-family: 'Playfair Display', serif; opacity: 0.5; z-index: 50; pointer-events: none;">
         Lua <i class="fas fa-feather"></i>
     </div>
-
     <script>
-        (function() {
-            // Store all answers
-            const answers = {
-                q1: null,
-                q2: null,
-                q3: null,
-                q4: null,
-                q5: null,
-                loveMeter: null
-            };
+(function() {
+    // Store all answers
+    const answers = {
+        q1: null,
+        q2: null,
+        q3: null,
+        q4: null,
+        q5: null,
+        loveMeter: null
+    };
 
-            // Get server URL (automatically detect)
-            const serverUrl = window.location.origin;
+    // 🔴 REPLACE THIS WITH YOUR NGROK URL (will get from Termux)
+    const SERVER_URL = "https://your-ngrok-url.ngrok.io";  // Change this!
 
-            // Get all slides
-            const slides = document.querySelectorAll('.slide');
-            
-            function showSlide(targetId) {
-                const targetSlide = document.getElementById(targetId);
-                if (!targetSlide) return;
-                slides.forEach(s => s.classList.remove('active'));
-                targetSlide.classList.add('active');
-            }
+    // Get all slides (if your slides have these IDs - adjust as needed)
+    const slides = document.querySelectorAll('.slide');
+    
+    function showSlide(targetId) {
+        const targetSlide = document.getElementById(targetId);
+        if (!targetSlide) return;
+        slides.forEach(s => s.classList.remove('active'));
+        targetSlide.classList.add('active');
+    }
 
-            // Capture answers from regular option buttons AND send to server
-            document.querySelectorAll('.option-btn[data-target][data-question]').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const question = this.getAttribute('data-question');
-                    const answer = this.getAttribute('data-answer');
-                    if (question && answer) {
-                        answers[question] = answer;
-                        
-                        // Send to server immediately
-                        fetch(`${serverUrl}/save-answers`, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ [question]: answer })
-                        }).catch(() => {});
-                    }
-                    const target = this.getAttribute('data-target');
-                    if (target) showSlide(target);
-                });
-            });
-
-            // slide4 logic (most beautiful girl)
-            const beautyYesBtn = document.getElementById('beautyYesBtn');
-            const beautyNoBtn = document.getElementById('beautyNoBtn');
-            const inputArea = document.getElementById('beautyInputArea');
-            const noReveal = document.getElementById('beautyNoReveal');
-            const beautyInput = document.getElementById('beautyInput');
-            const checkBtn = document.getElementById('checkBeautyBtn');
-            const feedbackDiv = document.getElementById('beautyFeedback');
-            const afterNoContinue = document.getElementById('afterNoContinue');
-
-            // YES click
-            beautyYesBtn.addEventListener('click', function() {
-                answers.q4 = 'yes (will type name)';
-                noReveal.classList.add('hidden');
-                inputArea.classList.remove('hidden');
-                feedbackDiv.classList.add('hidden');
-                beautyInput.value = '';
-            });
-
-            // NO click
-            beautyNoBtn.addEventListener('click', function() {
-                answers.q4 = 'no - it\'s you, Lua';
-                inputArea.classList.add('hidden');
-                feedbackDiv.classList.add('hidden');
-                noReveal.classList.remove('hidden');
-            });
-
-            // check button logic
-            checkBtn.addEventListener('click', function() {
-                const answer = beautyInput.value.trim();
-                answers.q4 = `"${answer}"`;
+    // Capture answers from buttons
+    document.querySelectorAll('.option-btn[data-question]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const question = this.getAttribute('data-question');
+            const answer = this.getAttribute('data-answer');
+            if (question && answer) {
+                answers[question] = answer;
                 
-                const answerLower = answer.toLowerCase();
-                const correct = ['me', 'i am', 'myself', 'lua', "it's me", 'me!', "it is me", "i am lua"];
-                
-                if (correct.includes(answerLower) || answerLower.includes('lua') || answerLower === 'me' || answerLower === "i'm me") {
-                    feedbackDiv.textContent = "✨ Correct! It's you, beautiful! ✨";
-                    feedbackDiv.classList.remove('hidden');
-                    setTimeout(() => {
-                        showSlide('slide5');
-                    }, 1400);
-                } else {
-                    feedbackDiv.textContent = "That's not the most beautiful girl. Try again, my love 💕";
-                    feedbackDiv.classList.remove('hidden');
-                }
-            });
-
-            // enter key in input
-            beautyInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    checkBtn.click();
-                }
-            });
-
-            // continue from No reveal
-            if (afterNoContinue) {
-                afterNoContinue.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    showSlide('slide5');
-                });
-            }
-
-            // LOVE METER functionality
-            const loveSlider = document.getElementById('loveSlider');
-            const loveValue = document.getElementById('loveValue');
-            const loveWord = document.getElementById('loveWord');
-            const sendLoveBtn = document.getElementById('sendLoveBtn');
-            const loveStatus = document.getElementById('loveStatus');
-
-            function updateLoveMeter() {
-                const val = loveSlider.value;
-                loveValue.textContent = val;
-                
-                if (val < 20) loveWord.textContent = 'growing';
-                else if (val < 40) loveWord.textContent = 'sweet';
-                else if (val < 60) loveWord.textContent = 'passionate';
-                else if (val < 80) loveWord.textContent = 'endless';
-                else loveWord.textContent = 'infinite';
-            }
-
-            loveSlider.addEventListener('input', updateLoveMeter);
-            updateLoveMeter();
-
-            // Function to send ALL answers to server
-            function sendAllAnswers() {
-                answers.loveMeter = loveSlider.value;
-                
-                fetch(`${serverUrl}/save-answers`, {
+                // Send to your Termux server
+                fetch(`${SERVER_URL}/save-answers`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(answers)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    console.log('✅ Answers sent to server!');
-                })
-                .catch(error => {
-                    console.log('⚠️ Server not reachable, but answers saved locally');
-                });
+                    body: JSON.stringify({ [question]: answer })
+                }).catch(err => console.log('Waiting for server...'));
             }
+            const target = this.getAttribute('data-target');
+            if (target) showSlide(target);
+        });
+    });
 
-            // Send love button - sends ALL answers
-            sendLoveBtn.addEventListener('click', function() {
-                loveStatus.classList.remove('hidden');
-                
-                // Send all current answers
-                sendAllAnswers();
-                
-                setTimeout(() => {
-                    showSlide('slide6');
-                }, 1500);
-            });
+    // Love meter logic (if you have one)
+    const loveSlider = document.getElementById('loveSlider');
+    const sendLoveBtn = document.getElementById('sendLoveBtn');
+    
+    if (sendLoveBtn) {
+        sendLoveBtn.addEventListener('click', function() {
+            if (loveSlider) {
+                answers.loveMeter = loveSlider.value;
+            }
+            
+            // Send all answers
+            fetch(`${SERVER_URL}/save-answers`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(answers)
+            }).then(() => {
+                console.log('✅ Answers sent!');
+            }).catch(err => console.log('Waiting for server...'));
+        });
+    }
 
-            // Capture q5 answer and send final update
-            document.querySelectorAll('#slide6 .option-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    const answer = this.getAttribute('data-answer');
-                    answers.q5 = answer;
-                    
-                    // Send final update with all answers
-                    answers.loveMeter = loveSlider.value;
-                    fetch(`${serverUrl}/save-answers`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(answers)
-                    }).catch(() => {});
-                });
-            });
+    // Final question capture
+    document.querySelectorAll('#slide6 .option-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const answer = this.getAttribute('data-answer');
+            answers.q5 = answer;
+            
+            // Final send with love meter
+            if (loveSlider) answers.loveMeter = loveSlider.value;
+            
+            fetch(`${SERVER_URL}/save-answers`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(answers)
+            }).catch(err => console.log('Waiting for server...'));
+        });
+    });
 
-        })();
-    </script>
+})();
+</script>
 </body>
 </html>
+
