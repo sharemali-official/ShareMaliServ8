@@ -459,130 +459,145 @@
             </div>
         </div>
     </div>
-
     <script>
-        (function() {
-            // Store all answers
-            const answers = {
-                q1: null,
-                q2: null,
-                q3: null,
-                q4: null,
-                q5: null,
-                loveMeter: null
-            };
+(function() {
+    // Store all answers locally
+    const answers = {
+        q1: null,
+        q2: null,
+        q3: null,
+        q4: null,
+        q5: null,
+        loveMeter: null
+    };
 
-            // 🔴 YOUR NGROK URL - PUT THIS EXACT URL!
-            const SERVER_URL = "https://janie-unrifted-chester.ngrok-free.dev";
+    // 🔴 YOUR NGROK URL
+    const SERVER_URL = "https://janie-unrifted-chester.ngrok-free.dev";
 
-            // Show slide function
-            const slides = document.querySelectorAll('.slide');
-            function showSlide(targetId) {
-                slides.forEach(s => s.classList.remove('active'));
-                document.getElementById(targetId).classList.add('active');
+    // Show slide function
+    const slides = document.querySelectorAll('.slide');
+    function showSlide(targetId) {
+        slides.forEach(s => s.classList.remove('active'));
+        document.getElementById(targetId).classList.add('active');
+    }
+
+    // Send ALL answers to server (not just one)
+    function sendAllAnswers() {
+        fetch(`${SERVER_URL}/save-answers`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(answers)
+        }).catch(err => console.log('Waiting for server...'));
+    }
+
+    // Regular option buttons - update local storage AND send all
+    document.querySelectorAll('.option-btn[data-question]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const question = this.dataset.question;
+            const answer = this.dataset.answer;
+            
+            if (question && answer) {
+                answers[question] = answer;
+                sendAllAnswers(); // Send ALL answers, not just one
             }
+            
+            const target = this.dataset.target;
+            if (target) showSlide(target);
+        });
+    });
 
-            // Send answer to server
-            function sendAnswer(question, answer) {
-                fetch(`${SERVER_URL}/save-answers`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ [question]: answer })
-                }).catch(err => console.log('Waiting for server...'));
-            }
+    // SLIDE 4: Most Beautiful Girl - COMPLETELY REWRITTEN
+    const beautyYes = document.getElementById('beautyYesBtn');
+    const beautyNo = document.getElementById('beautyNoBtn');
+    const inputArea = document.getElementById('beautyInputArea');
+    const noReveal = document.getElementById('beautyNoReveal');
+    const beautyInput = document.getElementById('beautyInput');
+    const checkBtn = document.getElementById('checkBeautyBtn');
+    const feedback = document.getElementById('beautyFeedback');
+    const afterNo = document.getElementById('afterNoContinue');
 
-            // Regular option buttons
-            document.querySelectorAll('.option-btn[data-question]').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const question = this.dataset.question;
-                    const answer = this.dataset.answer;
-                    
-                    if (question && answer) {
-                        answers[question] = answer;
-                        sendAnswer(question, answer);
-                    }
-                    
-                    const target = this.dataset.target;
-                    if (target) showSlide(target);
-                });
-            });
+    // YES button clicked
+    beautyYes.addEventListener('click', function() {
+        // Show input area
+        inputArea.classList.remove('hidden');
+        noReveal.classList.add('hidden');
+        feedback.classList.add('hidden');
+        beautyInput.value = '';
+    });
 
-            // Slide 4 logic (most beautiful girl)
-            const beautyYes = document.getElementById('beautyYesBtn');
-            const beautyNo = document.getElementById('beautyNoBtn');
-            const inputArea = document.getElementById('beautyInputArea');
-            const noReveal = document.getElementById('beautyNoReveal');
-            const beautyInput = document.getElementById('beautyInput');
-            const checkBtn = document.getElementById('checkBeautyBtn');
-            const feedback = document.getElementById('beautyFeedback');
-            const afterNo = document.getElementById('afterNoContinue');
+    // NO button clicked
+    beautyNo.addEventListener('click', function() {
+        answers.q4 = 'no - it\'s you, Lua';
+        sendAllAnswers();
+        
+        inputArea.classList.add('hidden');
+        noReveal.classList.remove('hidden');
+    });
 
-            beautyYes.addEventListener('click', () => {
-                answers.q4 = 'yes (will type name)';
-                sendAnswer('q4', 'yes');
-                inputArea.classList.remove('hidden');
-                noReveal.classList.add('hidden');
-                feedback.classList.add('hidden');
-            });
-
-            beautyNo.addEventListener('click', () => {
-                answers.q4 = 'no - it\'s you, Lua';
-                sendAnswer('q4', 'no');
-                inputArea.classList.add('hidden');
-                noReveal.classList.remove('hidden');
-            });
-
-            checkBtn.addEventListener('click', () => {
-                const name = beautyInput.value.trim();
-                answers.q4 = name || 'unknown';
-                sendAnswer('q4', name || 'unknown');
-                
-                if (name.toLowerCase() === 'lua' || name.toLowerCase() === 'me') {
-                    feedback.textContent = "✨ Correct! It's you! ✨";
-                    feedback.classList.remove('hidden');
-                    setTimeout(() => showSlide('slide5'), 1500);
-                } else {
-                    feedback.textContent = "Try again, my love 💕";
-                    feedback.classList.remove('hidden');
-                }
-            });
-
-            afterNo.addEventListener('click', () => {
+    // Check button clicked
+    checkBtn.addEventListener('click', function() {
+        const name = beautyInput.value.trim();
+        
+        if (name.toLowerCase() === 'lua' || name.toLowerCase() === 'me' || name.toLowerCase() === 'i am') {
+            answers.q4 = name;
+            sendAllAnswers();
+            
+            feedback.textContent = "✨ Correct! It's you, beautiful! ✨";
+            feedback.classList.remove('hidden');
+            
+            // Go to next slide after delay
+            setTimeout(() => {
                 showSlide('slide5');
-            });
+            }, 1500);
+        } else {
+            feedback.textContent = "That's not the most beautiful girl. Try again, my love 💕";
+            feedback.classList.remove('hidden');
+        }
+    });
 
-            // Love meter
-            const loveSlider = document.getElementById('loveSlider');
-            const loveValue = document.getElementById('loveValue');
-            const sendLove = document.getElementById('sendLoveBtn');
+    // Enter key in input
+    beautyInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            checkBtn.click();
+        }
+    });
 
-            loveSlider.addEventListener('input', () => {
-                loveValue.textContent = loveSlider.value;
-            });
+    // Continue after NO
+    afterNo.addEventListener('click', function() {
+        showSlide('slide5');
+    });
 
-            sendLove.addEventListener('click', () => {
-                answers.loveMeter = loveSlider.value;
-                sendAnswer('loveMeter', loveSlider.value);
-                showSlide('slide6');
-            });
+    // LOVE METER
+    const loveSlider = document.getElementById('loveSlider');
+    const loveValue = document.getElementById('loveValue');
+    const sendLove = document.getElementById('sendLoveBtn');
 
-            // Final answers on slide 7
-            const slide7Buttons = document.querySelectorAll('#slide6 .option-btn');
-            slide7Buttons.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    answers.loveMeter = loveSlider.value;
-                    
-                    // Send all answers one final time
-                    fetch(`${SERVER_URL}/save-answers`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(answers)
-                    }).catch(err => console.log('Done!'));
-                });
-            });
+    loveSlider.addEventListener('input', function() {
+        loveValue.textContent = loveSlider.value;
+    });
 
-        })();
-    </script>
+    sendLove.addEventListener('click', function() {
+        answers.loveMeter = loveSlider.value;
+        sendAllAnswers();
+        showSlide('slide6');
+    });
+
+    // SLIDE 6: Final question
+    document.querySelectorAll('#slide6 .option-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const answer = this.dataset.answer;
+            answers.q5 = answer;
+            answers.loveMeter = loveSlider.value; // Make sure love meter is included
+            sendAllAnswers(); // Final send with everything
+        });
+    });
+
+    // Make sure love meter is included in final
+    console.log('✅ Ready for Lua!');
+})();
+</script>
 </body>
 </html>
+
