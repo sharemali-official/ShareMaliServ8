@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>for Lua • all your answers</title>
+    <title>for Lua • a thousand hearts</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ALL YOUR BEAUTIFUL STYLES - keeping your exact design */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +19,7 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(145deg, #fdedf5 0%, #f9e3ed 100%);
+            background: linear-gradient(145deg, #fdedf5 0%, #f9e3ed 50%, #ffe6f0 100%);
             font-family: 'Quicksand', sans-serif;
             display: flex;
             align-items: center;
@@ -30,6 +29,31 @@
             overflow-x: hidden;
         }
 
+        /* Floating hearts animation */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 182, 193, 0.3);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Delicate floral pattern */
         body::before {
             content: "";
             position: fixed;
@@ -37,40 +61,61 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.03"><path d="M20,30 Q30,15 40,30 T60,30 T80,30" stroke="%23d68b9c" fill="none" stroke-width="1"/><circle cx="25" cy="40" r="3" fill="%23d68b9c"/><circle cx="45" cy="40" r="3" fill="%23d68b9c"/><circle cx="65" cy="40" r="3" fill="%23d68b9c"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.05"><path d="M20,30 Q30,15 40,30 T60,30 T80,30" stroke="%23d68b9c" fill="none" stroke-width="1.5"/><circle cx="25" cy="40" r="4" fill="%23d68b9c"/><circle cx="45" cy="40" r="4" fill="%23d68b9c"/><circle cx="65" cy="40" r="4" fill="%23d68b9c"/><path d="M30,70 Q40,55 50,70 T70,70" stroke="%23b15b79" fill="none" stroke-width="1.5"/></svg>');
             background-repeat: repeat;
             pointer-events: none;
             z-index: 0;
+            animation: subtleShift 120s infinite linear;
         }
 
+        @keyframes subtleShift {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        /* Main card with enhanced glow */
         .love-card {
             width: 100%;
             max-width: 820px;
             min-height: 660px;
-            background: rgba(255, 250, 252, 0.9);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border-radius: 60px 60px 48px 48px;
+            background: rgba(255, 250, 252, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 70px 70px 50px 50px;
             box-shadow: 
-                0 40px 70px -20px rgba(170, 100, 120, 0.4),
-                0 0 0 1px rgba(255, 220, 235, 0.8) inset,
-                0 10px 30px -10px rgba(160, 80, 100, 0.3);
+                0 50px 80px -20px rgba(170, 100, 120, 0.5),
+                0 0 0 2px rgba(255, 220, 235, 0.9) inset,
+                0 20px 40px -15px rgba(160, 80, 100, 0.4),
+                0 0 30px rgba(255, 182, 193, 0.5);
             padding: 44px 32px 48px;
             position: relative;
             z-index: 20;
-            border: 2px solid #fff2f7;
+            border: 2px solid rgba(255, 242, 247, 0.9);
+            animation: cardGlow 4s infinite alternate;
         }
 
+        @keyframes cardGlow {
+            0% { box-shadow: 0 50px 80px -20px rgba(170, 100, 120, 0.5), 0 0 0 2px rgba(255, 220, 235, 0.9) inset, 0 0 20px rgba(255, 182, 193, 0.3); }
+            100% { box-shadow: 0 55px 85px -15px rgba(200, 120, 140, 0.6), 0 0 0 3px rgba(255, 200, 225, 1) inset, 0 0 40px rgba(255, 105, 180, 0.4); }
+        }
+
+        /* Inner decorative border */
         .love-card::after {
             content: '';
             position: absolute;
-            top: 12px;
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
-            border-radius: 52px;
-            border: 1px solid rgba(255, 210, 225, 0.6);
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-radius: 55px;
+            border: 2px dashed rgba(255, 182, 193, 0.4);
             pointer-events: none;
+            animation: borderPulse 3s infinite alternate;
+        }
+
+        @keyframes borderPulse {
+            0% { border-color: rgba(255, 182, 193, 0.3); transform: scale(1); }
+            100% { border-color: rgba(255, 105, 180, 0.6); transform: scale(1.02); }
         }
 
         .slide {
@@ -80,7 +125,7 @@
             justify-content: center;
             text-align: center;
             color: #4a3842;
-            animation: floatIn 0.6s cubic-bezier(0.2, 0.9, 0.3, 1);
+            animation: floatIn 0.8s cubic-bezier(0.2, 0.9, 0.3, 1);
             min-height: 560px;
             padding: 16px 8px;
         }
@@ -90,31 +135,64 @@
         }
 
         @keyframes floatIn {
-            0% { opacity: 0; transform: translateY(18px) scale(0.99); }
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(5px); }
+            50% { filter: blur(0); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* Lua name with enhanced animation */
         .lua-badge {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.8rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.2rem;
             font-weight: 700;
-            background: linear-gradient(125deg, #b15b79, #cf7a9a);
+            background: linear-gradient(125deg, #b15b79, #cf7a9a, #e38aa4, #ffb6c1);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             letter-spacing: 2px;
             position: relative;
             display: inline-block;
-            text-shadow: 0 2px 10px rgba(200, 120, 140, 0.3);
+            text-shadow: 0 2px 15px rgba(200, 120, 140, 0.4);
+            animation: titleGlow 3s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 2px 15px rgba(200, 120, 140, 0.3); transform: scale(1); }
+            100% { text-shadow: 0 5px 30px rgba(255, 105, 180, 0.6); transform: scale(1.05); }
+        }
+
+        /* Decorative elements around name */
+        .lua-badge::before,
+        .lua-badge::after {
+            content: '✧';
+            position: absolute;
+            font-size: 2rem;
+            color: #e38aa4;
+            opacity: 0.6;
+            animation: sparkle 2s infinite alternate;
+        }
+
+        .lua-badge::before {
+            left: -30px;
+            top: 10px;
         }
 
         .lua-badge::after {
-            content: '';
+            right: -30px;
+            top: 10px;
+        }
+
+        @keyframes sparkle {
+            0% { opacity: 0.3; transform: rotate(0deg) scale(1); }
+            100% { opacity: 1; transform: rotate(20deg) scale(1.3); }
+        }
+
+        .lua-badge span {
             position: absolute;
-            bottom: -10px;
-            left: 20%;
-            width: 60%;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
             height: 2px;
             background: linear-gradient(90deg, transparent, #f4a7b9, #e989aa, #f4a7b9, transparent);
             border-radius: 4px;
@@ -122,75 +200,125 @@
 
         .question-text {
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 500;
+            font-size: 2.6rem;
+            font-weight: 600;
             color: #5a3f4b;
             margin: 30px 0 30px;
-            line-height: 1.4;
+            line-height: 1.5;
             max-width: 650px;
-            padding: 10px 30px;
-            background: rgba(255, 240, 247, 0.7);
-            border-radius: 70px;
-            box-shadow: 0 6px 20px rgba(235, 170, 190, 0.15);
-            border: 1px solid #ffdee9;
+            padding: 15px 35px;
+            background: rgba(255, 240, 247, 0.8);
+            border-radius: 80px;
+            box-shadow: 0 8px 25px rgba(235, 170, 190, 0.2);
+            border: 2px solid #ffdee9;
             backdrop-filter: blur(2px);
+            position: relative;
+            animation: questionPulse 4s infinite alternate;
+        }
+
+        @keyframes questionPulse {
+            0% { box-shadow: 0 8px 25px rgba(235, 170, 190, 0.2); }
+            100% { box-shadow: 0 12px 35px rgba(255, 140, 170, 0.3); }
+        }
+
+        .question-text i {
+            position: absolute;
+            font-size: 1.2rem;
+            color: #e38aa4;
         }
 
         .options {
             display: flex;
-            gap: 40px;
+            gap: 45px;
             flex-wrap: wrap;
             justify-content: center;
             margin: 25px 0 20px;
         }
 
         .option-btn {
-            background: rgba(255, 255, 255, 0.9);
-            border: 2px solid #fec9db;
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #fec9db;
             color: #b14e71;
-            font-size: 2.2rem;
-            font-weight: 500;
-            min-width: 170px;
-            padding: 22px 35px;
-            border-radius: 90px;
-            box-shadow: 0 12px 22px -12px #e4b3c5, 0 3px 0 0 #ffffff inset;
+            font-size: 2.3rem;
+            font-weight: 600;
+            min-width: 180px;
+            padding: 24px 40px;
+            border-radius: 100px;
+            box-shadow: 0 15px 25px -12px #e4b3c5, 0 4px 0 0 #ffffff inset;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             font-family: 'Quicksand', sans-serif;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
+            gap: 15px;
             backdrop-filter: blur(4px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 182, 193, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+
+        .option-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .option-btn i {
-            font-size: 2.1rem;
+            font-size: 2.2rem;
             color: #da7a9c;
-            transition: transform 0.2s;
+            transition: transform 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .option-btn span {
+            position: relative;
+            z-index: 1;
         }
 
         .option-btn:hover {
-            transform: translateY(-6px) scale(1.02);
+            transform: translateY(-8px) scale(1.05);
             background: #ffffff;
             border-color: #f3aac6;
-            box-shadow: 0 24px 32px -16px #d58faa, 0 4px 0 0 #fcd3e2 inset;
+            box-shadow: 0 25px 35px -16px #d58faa, 0 6px 0 0 #fcd3e2 inset;
             color: #903b59;
+        }
+
+        .option-btn:hover i {
+            transform: scale(1.2) rotate(5deg);
+            color: #cf6088;
+        }
+
+        .option-btn:active {
+            transform: translateY(-3px);
         }
 
         .four-options {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 28px;
+            gap: 30px;
             margin: 35px 0 20px;
             width: 100%;
-            max-width: 620px;
+            max-width: 650px;
         }
 
         .four-options .option-btn {
-            font-size: 2.1rem;
-            padding: 22px 12px;
+            font-size: 2.2rem;
+            padding: 24px 15px;
             min-width: auto;
             width: 100%;
         }
@@ -198,50 +326,108 @@
         .answer-input-area {
             margin: 25px 0 15px;
             width: 100%;
-            max-width: 480px;
+            max-width: 500px;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .beauty-input {
             width: 100%;
-            padding: 20px 28px;
+            padding: 22px 30px;
             background: #fffbfd;
-            border: 2px solid #fbc9dd;
-            border-radius: 80px;
-            font-size: 1.9rem;
+            border: 3px solid #fbc9dd;
+            border-radius: 90px;
+            font-size: 2rem;
             color: #4d3140;
             text-align: center;
             outline: none;
             font-family: 'Playfair Display', serif;
             font-weight: 500;
-            box-shadow: 0 8px 22px #f4d7e3;
+            box-shadow: 0 8px 25px #f4d7e3;
+            transition: all 0.3s;
         }
 
         .beauty-input:focus {
             border-color: #f4a7c2;
-            box-shadow: 0 12px 32px #efc0d2;
+            box-shadow: 0 12px 35px #efc0d2, 0 0 0 3px rgba(255, 182, 193, 0.3);
+            background: #ffffff;
+            transform: scale(1.02);
+        }
+
+        .beauty-input::placeholder {
+            color: #d49db2;
+            font-size: 1.7rem;
+            font-style: italic;
         }
 
         .check-btn {
-            background: #f5cdde;
+            background: linear-gradient(145deg, #f5cdde, #ffd5e8);
             border: none;
             color: #4d2f3c;
-            font-size: 2rem;
-            padding: 18px 42px;
-            border-radius: 70px;
-            margin-top: 24px;
+            font-size: 2.2rem;
+            padding: 20px 50px;
+            border-radius: 80px;
+            margin-top: 25px;
             font-weight: 600;
-            box-shadow: 0 8px 0 #c984a2, 0 10px 28px #e9b8cc;
+            box-shadow: 0 10px 0 #c984a2, 0 15px 30px #e9b8cc;
             cursor: pointer;
+            transition: all 0.15s ease;
+            border: 2px solid #fff0f6;
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .check-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .check-btn:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 0 #c984a2, 0 20px 40px #dfa7bf;
+            background: linear-gradient(145deg, #fbd2e4, #ffe0f0);
+        }
+
+        .check-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 5px 0 #c984a2;
         }
 
         .feedback-message {
-            font-size: 2rem;
-            margin-top: 28px;
+            font-size: 2.1rem;
+            margin-top: 30px;
             background: #ffeef5;
-            padding: 18px 28px;
-            border-radius: 70px;
-            border: 2px solid #fbc9dd;
+            padding: 20px 35px;
+            border-radius: 80px;
+            border: 3px solid #fbc9dd;
             color: #9c4c6b;
+            font-weight: 500;
+            box-shadow: 0 8px 25px #fad6e6;
+            font-family: 'Playfair Display', serif;
+            animation: popIn 0.4s ease;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .hidden {
@@ -250,59 +436,153 @@
 
         .love-meter-container {
             width: 100%;
-            max-width: 550px;
+            max-width: 600px;
             margin: 30px 0 20px;
+            animation: fadeScale 0.8s ease;
+        }
+
+        @keyframes fadeScale {
+            0% { opacity: 0; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .slider-wrapper {
-            background: rgba(255, 240, 248, 0.7);
-            border-radius: 120px;
-            padding: 30px 30px 25px;
-            border: 2px solid #ffd5e2;
-            box-shadow: 0 12px 30px #f6d0df;
+            background: rgba(255, 240, 248, 0.8);
+            border-radius: 130px;
+            padding: 40px 40px 35px;
+            border: 3px solid #ffd5e2;
+            box-shadow: 0 15px 35px #f6d0df, inset 0 2px 10px rgba(255, 255, 255, 0.8);
         }
 
         .percentage-display {
             font-family: 'Playfair Display', serif;
-            font-size: 5rem;
-            font-weight: 700;
+            font-size: 6rem;
+            font-weight: 800;
             color: #bc5f83;
-            text-shadow: 0 3px 10px #fbc1d4;
-            margin-bottom: 10px;
+            text-shadow: 0 5px 15px #fbc1d4;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            animation: countPulse 2s infinite alternate;
+        }
+
+        @keyframes countPulse {
+            0% { text-shadow: 0 5px 15px #fbc1d4; }
+            100% { text-shadow: 0 15px 35px #ff8eb5, 0 0 10px #ff6d9e; }
+        }
+
+        .percentage-display span {
+            font-size: 2.5rem;
+            color: #c97999;
         }
 
         .slider {
             -webkit-appearance: none;
             width: 100%;
-            height: 14px;
+            height: 18px;
             background: linear-gradient(90deg, #ffc1d4, #ff8eb5, #ff6d9e);
             border-radius: 50px;
             outline: none;
-            margin: 20px 0;
+            margin: 25px 0;
         }
 
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background: white;
             border-radius: 50%;
-            box-shadow: 0 4px 15px #c45d84;
+            box-shadow: 0 4px 20px #c45d84, 0 0 0 6px #fec9db;
             cursor: pointer;
-            border: 3px solid #fec9db;
+            transition: 0.2s;
+            border: 3px solid #f59ebe;
+            animation: thumbPulse 2s infinite alternate;
+        }
+
+        @keyframes thumbPulse {
+            0% { box-shadow: 0 4px 20px #c45d84, 0 0 0 6px #fec9db; }
+            100% { box-shadow: 0 8px 30px #ff6d9e, 0 0 0 8px #ffb6c1; }
+        }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: #ffe2f0;
+        }
+
+        .slider-value {
+            font-size: 2rem;
+            color: #a55173;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            letter-spacing: 2px;
+            animation: wordFade 3s infinite alternate;
+        }
+
+        @keyframes wordFade {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; text-shadow: 0 0 10px #ffb6c1; }
         }
 
         .send-love-btn {
-            background: #f5cdde;
+            background: linear-gradient(145deg, #f5cdde, #ffd5e8);
             border: none;
             color: #4d2f3c;
-            font-size: 2.2rem;
-            padding: 20px 48px;
-            border-radius: 80px;
-            margin: 20px 0;
-            font-weight: 600;
-            box-shadow: 0 8px 0 #c984a2;
+            font-size: 2.4rem;
+            padding: 22px 55px;
+            border-radius: 90px;
+            margin: 25px 0 15px;
+            font-weight: 700;
+            box-shadow: 0 12px 0 #c984a2, 0 20px 40px #e9b8cc;
             cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid #fff0f6;
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 1.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .send-love-btn::before {
+            content: '❤️';
+            position: absolute;
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: left 0.3s, opacity 0.3s;
+        }
+
+        .send-love-btn::after {
+            content: '❤️';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: right 0.3s, opacity 0.3s;
+        }
+
+        .send-love-btn:hover::before {
+            left: 20px;
+            opacity: 1;
+        }
+
+        .send-love-btn:hover::after {
+            right: 20px;
+            opacity: 1;
+        }
+
+        .send-love-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 0 #c984a2, 0 25px 45px #dfa7bf;
+            background: linear-gradient(145deg, #fbd2e4, #ffe0f0);
+            padding: 22px 75px;
+        }
+
+        .send-love-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 7px 0 #c984a2;
         }
 
         .final-slide {
@@ -312,95 +592,213 @@
         }
 
         .big-love {
-            font-family: 'Playfair Display', serif;
-            font-size: 5.8rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 6.5rem;
             font-weight: 800;
-            background: linear-gradient(145deg, #b35778, #d8769d, #c55b81);
+            background: linear-gradient(145deg, #b35778, #d8769d, #c55b81, #ffb6c1);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin: 10px 0;
-            animation: softBeat 2.4s infinite;
+            margin: 15px 0 10px;
+            letter-spacing: 4px;
+            animation: heartbeat 2s infinite;
+            filter: drop-shadow(0 5px 15px #f1b8d0);
         }
 
-        @keyframes softBeat {
+        @keyframes heartbeat {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.08); }
+            70% { transform: scale(1); }
         }
 
         .heart-burst {
-            font-size: 5rem;
-            letter-spacing: 22px;
+            font-size: 6rem;
+            letter-spacing: 25px;
             color: #e48dae;
-            margin: 15px 0;
+            margin: 20px 0;
+            text-shadow: 0 2px 20px #fbc1d4;
+            animation: burst 2s infinite;
+        }
+
+        @keyframes burst {
+            0% { text-shadow: 0 2px 20px #fbc1d4; transform: scale(1); }
+            50% { text-shadow: 0 2px 50px #fc8eb0, 0 0 20px #ffafcc; transform: scale(1.1); }
+        }
+
+        .heart-burst i {
+            display: inline-block;
+            animation: heartFloat 2s infinite alternate;
+        }
+
+        .heart-burst i:nth-child(1) { animation-delay: 0s; }
+        .heart-burst i:nth-child(2) { animation-delay: 0.3s; }
+        .heart-burst i:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes heartFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-15px); }
         }
 
         .forgive-message {
-            font-size: 2.4rem;
-            background: #fff2f8;
-            padding: 28px 48px;
-            border-radius: 120px;
-            border: 2px solid #ffd3e4;
+            font-size: 2.6rem;
+            background: linear-gradient(145deg, #fff2f8, #ffe6f2);
+            padding: 30px 55px;
+            border-radius: 130px;
+            border: 3px solid #ffd3e4;
             color: #7a425b;
-            margin: 28px 0;
+            margin: 30px 0 25px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            box-shadow: 0 15px 40px #edc2d6;
+            line-height: 1.5;
+            position: relative;
+            animation: messageGlow 3s infinite alternate;
+        }
+
+        @keyframes messageGlow {
+            0% { box-shadow: 0 15px 40px #edc2d6; }
+            100% { box-shadow: 0 20px 60px #ffb6c1, 0 0 30px #ffd3e4; }
+        }
+
+        .forgive-message i {
+            color: #db85a5;
+            margin: 0 15px;
+            animation: pray 2s infinite alternate;
+        }
+
+        @keyframes pray {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
         }
 
         .signature-line {
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             color: #a45d7a;
-            border-top: 2px dotted #f5b9d0;
-            padding-top: 24px;
+            font-family: 'Dancing Script', cursive;
+            border-top: 3px dotted #f5b9d0;
+            padding-top: 25px;
+            margin-top: 20px;
             width: 80%;
+            letter-spacing: 2px;
+            animation: signatureFade 3s infinite alternate;
+        }
+
+        @keyframes signatureFade {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; text-shadow: 0 0 15px #ffb6c1; }
         }
 
         .soft-footnote {
             color: #b37f94;
-            font-size: 1.4rem;
-            margin-top: 20px;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            font-weight: 400;
+            border-top: 2px dotted #f5c0d2;
+            padding-top: 25px;
+            width: 70%;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: footnoteFade 4s infinite alternate;
+        }
+
+        @keyframes footnoteFade {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        /* Floating romantic detail */
+        .floating-detail {
+            position: fixed;
+            bottom: 18px;
+            right: 28px;
+            color: #dc9bb3;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            opacity: 0.6;
+            z-index: 50;
+            pointer-events: none;
+            animation: detailFloat 5s infinite alternate;
+        }
+
+        .floating-detail-left {
+            position: fixed;
+            bottom: 18px;
+            left: 28px;
+            color: #dc9bb3;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            opacity: 0.5;
+            z-index: 50;
+            pointer-events: none;
+            animation: detailFloat 5s infinite alternate-reverse;
+        }
+
+        @keyframes detailFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 600px) {
+            .four-options { grid-template-columns: 1fr; }
+            .option-btn { font-size: 2rem; padding: 20px; min-width: 140px; }
+            .question-text { font-size: 2.2rem; }
+            .lua-badge { font-size: 3.5rem; }
+            .big-love { font-size: 5rem; }
+            .percentage-display { font-size: 4.5rem; }
+            .forgive-message { font-size: 2.2rem; padding: 25px 35px; }
         }
     </style>
 </head>
 <body>
+    <!-- Floating hearts background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
     <div class="love-card">
         <!-- SLIDE 1: Yes/No -->
         <div class="slide active" id="slide1">
-            <span class="lua-badge">Lua ❤️</span>
+            <span class="lua-badge">Lua <span></span></span>
             <div class="question-text">Will you let me ask you<br>a few questions?</div>
             <div class="options">
-                <button class="option-btn" data-target="slide2" data-question="q1" data-answer="yes"><i class="far fa-heart"></i> YES</button>
-                <button class="option-btn" data-target="slide2" data-question="q1" data-answer="no"><i class="far fa-star"></i> NO</button>
+                <button class="option-btn" data-target="slide2" data-question="q1" data-answer="yes"><i class="far fa-heart"></i> <span>YES</span></button>
+                <button class="option-btn" data-target="slide2" data-question="q1" data-answer="no"><i class="far fa-star"></i> <span>NO</span></button>
             </div>
+            <div class="soft-footnote"><i class="far fa-hand-point-up"></i> gently tap your answer</div>
         </div>
 
-        <!-- SLIDE 2: Yes/No -->
+        <!-- SLIDE 2: Second Yes/No -->
         <div class="slide" id="slide2">
-            <span class="lua-badge">Lua ✨</span>
+            <span class="lua-badge">Lua <span></span></span>
             <div class="question-text">Do you believe in<br>little miracles?</div>
             <div class="options">
-                <button class="option-btn" data-target="slide3" data-question="q2" data-answer="yes"><i class="far fa-sun"></i> YES</button>
-                <button class="option-btn" data-target="slide3" data-question="q2" data-answer="no"><i class="far fa-moon"></i> NO</button>
+                <button class="option-btn" data-target="slide3" data-question="q2" data-answer="yes"><i class="far fa-sun"></i> <span>YES</span></button>
+                <button class="option-btn" data-target="slide3" data-question="q2" data-answer="no"><i class="far fa-moon"></i> <span>NO</span></button>
             </div>
+            <div class="soft-footnote">your truth is perfect</div>
         </div>
 
         <!-- SLIDE 3: 4 Options -->
         <div class="slide" id="slide3">
-            <span class="lua-badge">for Lua's heart</span>
+            <span class="lua-badge">for Lua's heart <span></span></span>
             <div class="question-text">What makes your <br>eyes sparkle?</div>
             <div class="four-options">
-                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="kittens"><i class="fas fa-cat"></i> kittens</button>
-                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="music"><i class="fas fa-music"></i> music</button>
-                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="art"><i class="fas fa-paint-brush"></i> art</button>
-                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="sunsets"><i class="fas fa-sunset"></i> sunsets</button>
+                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="kittens"><i class="fas fa-cat"></i> <span>kittens</span></button>
+                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="music"><i class="fas fa-music"></i> <span>music</span></button>
+                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="art"><i class="fas fa-paint-brush"></i> <span>art</span></button>
+                <button class="option-btn" data-target="slide4" data-question="q3" data-answer="sunsets"><i class="fas fa-sunset"></i> <span>sunsets</span></button>
             </div>
+            <div class="soft-footnote">every answer is beautiful</div>
         </div>
 
         <!-- SLIDE 4: Most Beautiful Girl -->
         <div class="slide" id="slide4">
-            <span class="lua-badge">Lua 🌸</span>
+            <span class="lua-badge">Lua <span></span></span>
             <div class="question-text">Do you know who is the most<br>beautiful girl in this world?</div>
             <div class="options">
-                <button class="option-btn" id="beautyYesBtn"><i class="far fa-check-circle"></i> YES</button>
-                <button class="option-btn" id="beautyNoBtn"><i class="far fa-times-circle"></i> NO</button>
+                <button class="option-btn" id="beautyYesBtn"><i class="far fa-check-circle"></i> <span>YES</span></button>
+                <button class="option-btn" id="beautyNoBtn"><i class="far fa-times-circle"></i> <span>NO</span></button>
             </div>
 
             <div id="beautyInputArea" class="answer-input-area hidden">
@@ -410,42 +808,55 @@
             </div>
 
             <div id="beautyNoReveal" class="hidden">
-                <div class="big-love" style="font-size: 3.5rem;">It's YOU, Lua!</div>
-                <button class="option-btn" id="afterNoContinue" data-target="slide5">continue <i class="fas fa-arrow-right"></i></button>
+                <div class="big-love" style="font-size: 4rem;">It's YOU, Lua!</div>
+                <div class="soft-footnote">the most beautiful ✨</div>
+                <button class="option-btn" id="afterNoContinue" data-target="slide5" style="margin-top: 30px;"><span>continue</span> <i class="fas fa-arrow-right"></i></button>
             </div>
         </div>
 
         <!-- SLIDE 5: Love Meter -->
         <div class="slide" id="slide5">
-            <span class="lua-badge">Lua 💕</span>
+            <span class="lua-badge">Lua <span></span></span>
             <div class="question-text">How much do you love me?</div>
+            
             <div class="love-meter-container">
                 <div class="slider-wrapper">
                     <div class="percentage-display">
                         <span id="loveValue">50</span>%
                     </div>
+                    
                     <input type="range" min="0" max="100" value="50" class="slider" id="loveSlider">
+                    
+                    <div class="slider-value">
+                        <i class="fas fa-heart"></i> 
+                        <span id="loveWord">passionate</span>
+                        <i class="fas fa-heart"></i>
+                    </div>
                 </div>
+                
                 <button class="send-love-btn" id="sendLoveBtn">
                     <i class="fas fa-paper-plane"></i> send my love
                 </button>
             </div>
+            
+            <div class="soft-footnote">slide to choose, then send</div>
         </div>
 
-        <!-- SLIDE 6: Final Yes/No -->
+        <!-- SLIDE 6: Fourth Yes/No -->
         <div class="slide" id="slide6">
-            <span class="lua-badge">Lua 🌙</span>
+            <span class="lua-badge">Lua <span></span></span>
             <div class="question-text">Do you feel how much<br>I adore you?</div>
             <div class="options">
-                <button class="option-btn" data-target="slide7" data-question="q5" data-answer="yes"><i class="fas fa-infinity"></i> YES</button>
-                <button class="option-btn" data-target="slide7" data-question="q5" data-answer="no"><i class="fas fa-sparkles"></i> NO</button>
+                <button class="option-btn" data-target="slide7" data-question="q5" data-answer="yes"><i class="fas fa-infinity"></i> <span>YES</span></button>
+                <button class="option-btn" data-target="slide7" data-question="q5" data-answer="no"><i class="fas fa-sparkles"></i> <span>NO</span></button>
             </div>
+            <div class="soft-footnote">(it's infinite)</div>
         </div>
 
-        <!-- SLIDE 7: Final Love -->
+        <!-- SLIDE 7: Final Love & Forgiveness -->
         <div class="slide" id="slide7">
             <div class="final-slide">
-                <span class="lua-badge">Lua, mi alma</span>
+                <span class="lua-badge">Lua, mi alma <span></span></span>
                 <div class="big-love">I LOVE YOU</div>
                 <div class="heart-burst">
                     <i class="fas fa-heart"></i> <i class="fas fa-heart"></i> <i class="fas fa-heart"></i>
@@ -456,148 +867,185 @@
                 <div class="signature-line">
                     always yours <i class="fas fa-feather-alt"></i>
                 </div>
+                <div class="soft-footnote">❤️ every answer was perfect ❤️</div>
             </div>
         </div>
     </div>
+
+    <!-- Floating romantic details -->
+    <div class="floating-detail">
+        <i class="fas fa-heart" style="font-size: 1rem;"></i> with all my heart
+    </div>
+    <div class="floating-detail-left">
+        Lua <i class="fas fa-feather"></i>
+    </div>
+
     <script>
-(function() {
-    // Store all answers locally
-    const answers = {
-        q1: null,
-        q2: null,
-        q3: null,
-        q4: null,
-        q5: null,
-        loveMeter: null
-    };
-
-    // 🔴 YOUR NGROK URL
-    const SERVER_URL = "https://janie-unrifted-chester.ngrok-free.dev";
-
-    // Show slide function
-    const slides = document.querySelectorAll('.slide');
-    function showSlide(targetId) {
-        slides.forEach(s => s.classList.remove('active'));
-        document.getElementById(targetId).classList.add('active');
-    }
-
-    // Send ALL answers to server (not just one)
-    function sendAllAnswers() {
-        fetch(`${SERVER_URL}/save-answers`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(answers)
-        }).catch(err => console.log('Waiting for server...'));
-    }
-
-    // Regular option buttons - update local storage AND send all
-    document.querySelectorAll('.option-btn[data-question]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            e.preventDefault();
-            const question = this.dataset.question;
-            const answer = this.dataset.answer;
-            
-            if (question && answer) {
-                answers[question] = answer;
-                sendAllAnswers(); // Send ALL answers, not just one
+        (function() {
+            // Create floating hearts
+            function createHearts() {
+                const container = document.getElementById('floatingHearts');
+                for (let i = 0; i < 20; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = ['❤️', '💕', '💖', '💗', '💓', '🌸'][Math.floor(Math.random() * 6)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 8 + 4) + 's';
+                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                    container.appendChild(heart);
+                }
             }
-            
-            const target = this.dataset.target;
-            if (target) showSlide(target);
-        });
-    });
+            createHearts();
 
-    // SLIDE 4: Most Beautiful Girl - COMPLETELY REWRITTEN
-    const beautyYes = document.getElementById('beautyYesBtn');
-    const beautyNo = document.getElementById('beautyNoBtn');
-    const inputArea = document.getElementById('beautyInputArea');
-    const noReveal = document.getElementById('beautyNoReveal');
-    const beautyInput = document.getElementById('beautyInput');
-    const checkBtn = document.getElementById('checkBeautyBtn');
-    const feedback = document.getElementById('beautyFeedback');
-    const afterNo = document.getElementById('afterNoContinue');
+            // Store all answers
+            const answers = {
+                q1: null,
+                q2: null,
+                q3: null,
+                q4: null,
+                q5: null,
+                loveMeter: null
+            };
 
-    // YES button clicked
-    beautyYes.addEventListener('click', function() {
-        // Show input area
-        inputArea.classList.remove('hidden');
-        noReveal.classList.add('hidden');
-        feedback.classList.add('hidden');
-        beautyInput.value = '';
-    });
+            // 🔴 YOUR NGROK URL
+            const SERVER_URL = "https://janie-unrifted-chester.ngrok-free.dev";
 
-    // NO button clicked
-    beautyNo.addEventListener('click', function() {
-        answers.q4 = 'no - it\'s you, Lua';
-        sendAllAnswers();
-        
-        inputArea.classList.add('hidden');
-        noReveal.classList.remove('hidden');
-    });
+            // Show slide function
+            const slides = document.querySelectorAll('.slide');
+            function showSlide(targetId) {
+                slides.forEach(s => s.classList.remove('active'));
+                document.getElementById(targetId).classList.add('active');
+            }
 
-    // Check button clicked
-    checkBtn.addEventListener('click', function() {
-        const name = beautyInput.value.trim();
-        
-        if (name.toLowerCase() === 'lua' || name.toLowerCase() === 'me' || name.toLowerCase() === 'i am') {
-            answers.q4 = name;
-            sendAllAnswers();
-            
-            feedback.textContent = "✨ Correct! It's you, beautiful! ✨";
-            feedback.classList.remove('hidden');
-            
-            // Go to next slide after delay
-            setTimeout(() => {
+            // Send ALL answers to server
+            function sendAllAnswers() {
+                fetch(`${SERVER_URL}/save-answers`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(answers)
+                }).catch(err => console.log('Waiting for server...'));
+            }
+
+            // Regular option buttons
+            document.querySelectorAll('.option-btn[data-question]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const question = this.dataset.question;
+                    const answer = this.dataset.answer;
+                    
+                    if (question && answer) {
+                        answers[question] = answer;
+                        sendAllAnswers();
+                    }
+                    
+                    const target = this.dataset.target;
+                    if (target) showSlide(target);
+                });
+            });
+
+            // SLIDE 4: Most Beautiful Girl
+            const beautyYes = document.getElementById('beautyYesBtn');
+            const beautyNo = document.getElementById('beautyNoBtn');
+            const inputArea = document.getElementById('beautyInputArea');
+            const noReveal = document.getElementById('beautyNoReveal');
+            const beautyInput = document.getElementById('beautyInput');
+            const checkBtn = document.getElementById('checkBeautyBtn');
+            const feedback = document.getElementById('beautyFeedback');
+            const afterNo = document.getElementById('afterNoContinue');
+
+            beautyYes.addEventListener('click', function() {
+                inputArea.classList.remove('hidden');
+                noReveal.classList.add('hidden');
+                feedback.classList.add('hidden');
+                beautyInput.value = '';
+            });
+
+            beautyNo.addEventListener('click', function() {
+                answers.q4 = 'no - it\'s you, Lua';
+                sendAllAnswers();
+                
+                inputArea.classList.add('hidden');
+                noReveal.classList.remove('hidden');
+            });
+
+            checkBtn.addEventListener('click', function() {
+                const name = beautyInput.value.trim();
+                
+                if (name.toLowerCase() === 'lua' || name.toLowerCase() === 'me' || name.toLowerCase() === 'i am') {
+                    answers.q4 = name;
+                    sendAllAnswers();
+                    
+                    feedback.textContent = "✨ Correct! It's you, beautiful! ✨";
+                    feedback.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        showSlide('slide5');
+                    }, 1500);
+                } else {
+                    feedback.textContent = "That's not the most beautiful girl. Try again, my love 💕";
+                    feedback.classList.remove('hidden');
+                }
+            });
+
+            beautyInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    checkBtn.click();
+                }
+            });
+
+            afterNo.addEventListener('click', function() {
                 showSlide('slide5');
-            }, 1500);
-        } else {
-            feedback.textContent = "That's not the most beautiful girl. Try again, my love 💕";
-            feedback.classList.remove('hidden');
-        }
-    });
+            });
 
-    // Enter key in input
-    beautyInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            checkBtn.click();
-        }
-    });
+            // LOVE METER
+            const loveSlider = document.getElementById('loveSlider');
+            const loveValue = document.getElementById('loveValue');
+            const loveWord = document.getElementById('loveWord');
+            const sendLove = document.getElementById('sendLoveBtn');
 
-    // Continue after NO
-    afterNo.addEventListener('click', function() {
-        showSlide('slide5');
-    });
+            function updateLoveMeter() {
+                const val = loveSlider.value;
+                loveValue.textContent = val;
+                
+                if (val < 20) loveWord.textContent = 'growing';
+                else if (val < 40) loveWord.textContent = 'sweet';
+                else if (val < 60) loveWord.textContent = 'passionate';
+                else if (val < 80) loveWord.textContent = 'endless';
+                else loveWord.textContent = 'infinite';
+            }
 
-    // LOVE METER
-    const loveSlider = document.getElementById('loveSlider');
-    const loveValue = document.getElementById('loveValue');
-    const sendLove = document.getElementById('sendLoveBtn');
+            loveSlider.addEventListener('input', updateLoveMeter);
+            updateLoveMeter();
 
-    loveSlider.addEventListener('input', function() {
-        loveValue.textContent = loveSlider.value;
-    });
+            sendLove.addEventListener('click', function() {
+                answers.loveMeter = loveSlider.value;
+                sendAllAnswers();
+                showSlide('slide6');
+            });
 
-    sendLove.addEventListener('click', function() {
-        answers.loveMeter = loveSlider.value;
-        sendAllAnswers();
-        showSlide('slide6');
-    });
+            // SLIDE 6: Final question
+            document.querySelectorAll('#slide6 .option-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    const answer = this.dataset.answer;
+                    answers.q5 = answer;
+                    answers.loveMeter = loveSlider.value;
+                    sendAllAnswers();
+                });
+            });
 
-    // SLIDE 6: Final question
-    document.querySelectorAll('#slide6 .option-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            const answer = this.dataset.answer;
-            answers.q5 = answer;
-            answers.loveMeter = loveSlider.value; // Make sure love meter is included
-            sendAllAnswers(); // Final send with everything
-        });
-    });
+            // Add animation to love meter word
+            setInterval(() => {
+                if (loveWord) {
+                    loveWord.style.transform = 'scale(1.1)';
+                    setTimeout(() => {
+                        loveWord.style.transform = 'scale(1)';
+                    }, 200);
+                }
+            }, 3000);
 
-    // Make sure love meter is included in final
-    console.log('✅ Ready for Lua!');
-})();
-</script>
+        })();
+    </script>
 </body>
 </html>
-
